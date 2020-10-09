@@ -24,6 +24,15 @@ namespace Potok
             depth = new float[lenght];
         }
 
+        public void SetSize(int w,int h)
+        {
+            width = w;
+            heigth = h;
+            lenght = w * h;
+            color = new uint[lenght];
+            depth = new float[lenght];
+        }
+
         public void SetColor(uint color)
         {
             for(int i = 0; i < this.color.Length; i++)
@@ -34,18 +43,18 @@ namespace Potok
 
         public void SetColor(byte R, byte G, byte B)
         {
-            for (int i = 0; i < this.color.Length; i++)
+            for (int i = 0; i < color.Length; i++)
             {
-                byte[] colors = new byte[4] { 255, R, G, B };
+                byte[] colors = new byte[4] { B, G, R, 255 };
                 color[i] = BitConverter.ToUInt32(colors, 0);
             }
         }
 
         public void ClearColor()
         {
-            for (int i = 0; i < this.color.Length; i++)
+            for (int i = 0; i < color.Length; i++)
             {
-                this.color[i] = 0xFF000000;
+                color[i] = 0xFF000000;
             }
         }
 
@@ -63,7 +72,7 @@ namespace Potok
                     if (j == 0)
                         col = BitConverter.GetBytes(color[i]);
 
-                    bitmap.SetPixel(i, j, Color.FromArgb(col[0], col[1], col[2], col[3]));
+                    bitmap.SetPixel(i, j, Color.FromArgb(col[3], col[2], col[1], col[0]));
                 }
             }
             bitmap.Save(filname);
