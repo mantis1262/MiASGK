@@ -11,27 +11,27 @@ namespace Potok
     class Rasteryzer
     {
 
-        Buffor buffor;
-        List<Triangle> triangleList;
-        public List<Triangle> TriangleList { get => triangleList; set => triangleList = value; }
+        Buffor _buffor;
+        List<Triangle> _triangleList;
+        public List<Triangle> TriangleList { get => _triangleList; set => _triangleList = value; }
 
         public Rasteryzer(Buffor buffor)
         {
-            this.buffor = buffor;
-            triangleList = new List<Triangle>() ;
+            _buffor = buffor;
+            _triangleList = new List<Triangle>() ;
         }
 
         public Rasteryzer(Buffor buffor, List<Triangle> triangles)
         {
-            this.buffor = buffor;
-            triangleList = triangles;
+            _buffor = buffor;
+            _triangleList = triangles;
         }
 
 
         public void Draw()
         {
-            foreach (Triangle triangle in triangleList)
-                    triangle.Draw(buffor);
+            foreach (Triangle triangle in _triangleList)
+                    triangle.Draw(_buffor);
         }
 
 

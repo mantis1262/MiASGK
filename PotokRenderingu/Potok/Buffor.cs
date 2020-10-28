@@ -9,98 +9,98 @@ namespace Potok
 {
     class Buffor
     {
-        uint[][] color;
-        float[][] depth;
-        int width;
-        int heigth;
-        int lenght;
-        int minX, minY, maxX, maxY;
+        uint[][] _color;
+        float[][] _depth;
+        int _width;
+        int _heigth;
+        int _lenght;
+        int _minX, _minY, _maxX, _maxY;
 
-        public int Width { get => width;}
-        public int Heigth { get => heigth;}
-        public int Lenght { get => lenght;}
-        public int MinX { get => minX;}
-        public int MinY { get => minY;}
-        public int MaxX { get => maxX;}
-        public int MaxY { get => maxY;}
-        public uint[][] Color { get => color; }
-        public float[][] Depth { get => depth; }
+        public int Width { get => _width;}
+        public int Heigth { get => _heigth;}
+        public int Lenght { get => _lenght;}
+        public int MinX { get => _minX;}
+        public int MinY { get => _minY;}
+        public int MaxX { get => _maxX;}
+        public int MaxY { get => _maxY;}
+        public uint[][] Color { get => _color; }
+        public float[][] Depth { get => _depth; }
 
         public Buffor(int w, int h)
         {
-            width = w;
-            heigth = h;
-            lenght = w * h;
-            color = new uint[width][];
-            for (int i = 0; i < color.Length; i++)
+            _width = w;
+            _heigth = h;
+            _lenght = w * h;
+            _color = new uint[_width][];
+            for (int i = 0; i < _color.Length; i++)
             {
-                color[i] = new uint[heigth];
+                _color[i] = new uint[_heigth];
             }
 
-            depth = new float[width][];
-            for (int i = 0; i < depth.Length; i++)
+            _depth = new float[_width][];
+            for (int i = 0; i < _depth.Length; i++)
             {
-                depth[i] = new float[heigth];
+                _depth[i] = new float[_heigth];
             }
-            minX = 0;
-            minX = 0;
-            minY = 0;
-            maxX = width - 1;
-            maxY = heigth - 1;
+            _minX = 0;
+            _minX = 0;
+            _minY = 0;
+            _maxX = _width - 1;
+            _maxY = _heigth - 1;
         }
 
         public void SetSize(int w,int h)
         {
-            width = w;
-            heigth = h;
-            lenght = w * h;
-            color = new uint[width][];
-            for (int i = 0; i < color.Length; i++)
+            _width = w;
+            _heigth = h;
+            _lenght = w * h;
+            _color = new uint[_width][];
+            for (int i = 0; i < _color.Length; i++)
             {
-                color[i] = new uint[heigth];
+                _color[i] = new uint[_heigth];
             }
-            depth = new float[width][];
-            for (int i = 0; i < depth.Length; i++)
+            _depth = new float[_width][];
+            for (int i = 0; i < _depth.Length; i++)
             {
-                depth[i] = new float[heigth];
+                _depth[i] = new float[_heigth];
             }
-            minX = 0;
-            minY = 0;
-            maxX = width - 1;
-            maxY = heigth - 1;
+            _minX = 0;
+            _minY = 0;
+            _maxX = _width - 1;
+            _maxY = _heigth - 1;
         }
 
         public void SetPixel(uint color, int x, int y)
         {
-            this.color[x][y] = color;
+            this._color[x][y] = color;
         }
 
         public void SetPixel(byte R, byte G, byte B, int x, int y)
         {
             byte[] colors = new byte[4] { B, G, R, 255 };
-            color[x][y] = BitConverter.ToUInt32(colors, 0);
+            _color[x][y] = BitConverter.ToUInt32(colors, 0);
         }
 
         public void SetPixel(uint color, float depth, int x, int y)
         {
-            this.depth[x][y] = depth;
-            this.color[x][y] = color;
+            this._depth[x][y] = depth;
+            this._color[x][y] = color;
         }
 
         public void SetPixel(byte R, byte G, byte B, float depth, int x, int y)
         {
             byte[] colors = new byte[4] { B, G, R, 255 };
-            color[x][y] = BitConverter.ToUInt32(colors, 0);
-            this.depth[x][y] = depth;
+            _color[x][y] = BitConverter.ToUInt32(colors, 0);
+            this._depth[x][y] = depth;
         }
 
         public void SetColor(uint color)
         {
-            for(int i = 0; i < this.color.Length; i++)
+            for(int i = 0; i < this._color.Length; i++)
             {
-                for (int j = 0; j < this.color[i].Length; j++)
+                for (int j = 0; j < this._color[i].Length; j++)
                 {
-                    this.color[i][j] = color;
+                    this._color[i][j] = color;
                 }
             }
         }
@@ -109,44 +109,44 @@ namespace Potok
         {
             byte[] colors = new byte[4] { B, G, R, 255 };
             uint col = BitConverter.ToUInt32(colors, 0);
-            for (int i = 0; i < this.color.Length; i++)
+            for (int i = 0; i < this._color.Length; i++)
             {
-                for (int j = 0; j < this.color[i].Length; j++)
+                for (int j = 0; j < this._color[i].Length; j++)
                 {
-                    color[i][j] = col; 
+                    _color[i][j] = col; 
                 }
             }
         }
 
         public void SetDepth(float depth)
         {
-            for (int i = 0; i < this.depth.Length; i++)
+            for (int i = 0; i < this._depth.Length; i++)
             {
-                for (int j = 0; j < this.depth[i].Length; j++)
+                for (int j = 0; j < this._depth[i].Length; j++)
                 {
-                    this.depth[i][j] = depth;
+                    this._depth[i][j] = depth;
                 }
             }
         }
 
         public void ClearColor()
         {
-            for (int i = 0; i < color.Length; i++)
+            for (int i = 0; i < _color.Length; i++)
             {
-                for (int j = 0; j < this.color[i].Length; j++)
+                for (int j = 0; j < this._color[i].Length; j++)
                 {
-                    color[i][j] = 0xFF000000;
+                    _color[i][j] = 0xFF000000;
                 }
             }
         }
 
         public void ClearDepth()
         {
-            for (int i = 0; i < this.depth.Length; i++)
+            for (int i = 0; i < this._depth.Length; i++)
             {
-                for (int j = 0; j < this.depth[i].Length; j++)
+                for (int j = 0; j < this._depth[i].Length; j++)
                 {
-                    this.depth[i][j] = 2.0f;
+                    this._depth[i][j] = 2.0f;
                 }
             }
         }
@@ -154,12 +154,12 @@ namespace Potok
         public void Save(string filname)
         {
 
-            Bitmap bitmap = new Bitmap(width, heigth);
-            for (int i = 0; i < width; i++)
+            Bitmap bitmap = new Bitmap(_width, _heigth);
+            for (int i = 0; i < _width; i++)
             {
-                for (int j = 0; j < heigth; j++)
+                for (int j = 0; j < _heigth; j++)
                 {
-                    byte[] col = BitConverter.GetBytes(color[i][j]);
+                    byte[] col = BitConverter.GetBytes(_color[i][j]);
                     bitmap.SetPixel(i, j, System.Drawing.Color.FromArgb(col[3], col[2], col[1], col[0]));
                 }
             }

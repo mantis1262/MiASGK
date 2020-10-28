@@ -8,7 +8,20 @@ namespace Potok.Matematic
 {
     public static class Math
     {
-        public static float max3(float a, float b, float c)
+
+        public const float PI = (float)System.Math.PI;
+
+        public static float Sin(float a)
+        {
+            return (float)System.Math.Sin(a);
+        }
+
+        public static float Cos(float a)
+        {
+            return (float)System.Math.Cos(a);
+        }
+
+        public static float Max3(float a, float b, float c)
         {
             if (a < b)
             {
@@ -26,7 +39,7 @@ namespace Potok.Matematic
             }  
         }
 
-        public static float min3(float a, float b, float c)
+        public static float Min3(float a, float b, float c)
         {
             if (a < b)
             {
@@ -45,7 +58,7 @@ namespace Potok.Matematic
 
         }
 
-        public static float min(float a, float b)
+        public static float Min(float a, float b)
         {
             if (a > b)
                 return b;
@@ -53,7 +66,7 @@ namespace Potok.Matematic
                 return a;
         }
 
-        public static float max(float a, float b)
+        public static float Max(float a, float b)
         {
             if (a > b)
                 return 1;

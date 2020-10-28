@@ -10,48 +10,48 @@ namespace Potok.Figury
 {
     class Triangle
     {
-        Float3 a, b, c;
-        Float3 ac, bc, cc;
+        Float3 _a, _b, _c;
+        Float3 _ac, _bc, _cc;
 
         public Triangle(Float3 a, Float3 b, Float3 c, Float3 ac, Float3 bc, Float3 cc)
         {
-            this.a = a;
-            this.b = b;
-            this.c = c;
-            this.ac = ac;
-            this.bc = bc;
-            this.cc = cc;
+            _a = a;
+            _b = b;
+            _c = c;
+            _ac = ac;
+            _bc = bc;
+            _cc = cc;
         }
 
         public Triangle(Float3 a, Float3 b, Float3 c, byte R, byte G, byte B)
         {
-            this.a = a;
-            this.b = b;
-            this.c = c;
-            ac = new Float3(R,G,B);
-            bc = new Float3(R,G,B);
-            cc = new Float3(R,G,B);
+            _a = a;
+            _b = b;
+            _c = c;
+            _ac = new Float3(R,G,B);
+            _bc = new Float3(R,G,B);
+            _cc = new Float3(R,G,B);
         }
 
         public void Draw(Buffor buffor)
         {
-            float x1 = (a.X + 1) * buffor.Width * 0.5f;
-            float x2 = (b.X + 1) * buffor.Width * 0.5f;
-            float x3 = (c.X + 1) * buffor.Width * 0.5f;
+            float x1 = (_a.X + 1) * buffor.Width * 0.5f;
+            float x2 = (_b.X + 1) * buffor.Width * 0.5f;
+            float x3 = (_c.X + 1) * buffor.Width * 0.5f;
 
-            float y1 = (a.Y + 1) * buffor.Heigth * 0.5f;
-            float y2 = (b.Y + 1) * buffor.Heigth * 0.5f;
-            float y3 = (c.Y + 1) * buffor.Heigth * 0.5f;
+            float y1 = (_a.Y + 1) * buffor.Heigth * 0.5f;
+            float y2 = (_b.Y + 1) * buffor.Heigth * 0.5f;
+            float y3 = (_c.Y + 1) * buffor.Heigth * 0.5f;
 
-            int minX = (int)(Math.min3(x1, x2, x3) + 0.5f);
-            int maxX = (int)(Math.max3(x1, x2, x3) + 0.5f);
-            int minY = (int)(Math.min3(y1, y2, y3) + 0.5f);
-            int maxY = (int)(Math.max3(y1, y2, y3) + 0.5f);
+            int minX = (int)(Math.Min3(x1, x2, x3) + 0.5f);
+            int maxX = (int)(Math.Max3(x1, x2, x3) + 0.5f);
+            int minY = (int)(Math.Min3(y1, y2, y3) + 0.5f);
+            int maxY = (int)(Math.Max3(y1, y2, y3) + 0.5f);
 
-            minX = (int)Math.max(minX, buffor.MinX);
-            maxX = (int)Math.min(maxX, buffor.MaxX);
-            minY = (int)Math.max(minY, buffor.MinY);
-            maxY = (int)Math.min(maxY, buffor.MaxY);
+            minX = (int)Math.Max(minX, buffor.MinX);
+            maxX = (int)Math.Min(maxX, buffor.MaxX);
+            minY = (int)Math.Max(minY, buffor.MinY);
+            maxY = (int)Math.Min(maxY, buffor.MaxY);
 
             float x12 = x1 - x2;
             float x23 = x2 - x3;
@@ -84,8 +84,8 @@ namespace Potok.Figury
                         float lam1 = (y23 * (x - x3) - x23 * (y - y3)) * lamd1;
                         float lam2 = (y31 * (x - x3) - x31 * (y - y3)) * lamd2;
                         float lam3 = 1 - lam1 - lam2;
-                        float depth = (lam1 * a.Z + lam2 * b.Z + c.Z);
-                        Float3 color = (ac * lam1 + bc * lam2 + cc * lam3) * 255.0f;
+                        float depth = (lam1 * _a.Z + lam2 * _b.Z + _c.Z);
+                        Float3 color = (_ac * lam1 + _bc * lam2 + _cc * lam3) * 255.0f;
                         if (depth < buffor.Depth[x][y])
                         {
                             buffor.SetPixel((byte)color.X, (byte)color.Y, (byte)color.Z, depth, x, y);
