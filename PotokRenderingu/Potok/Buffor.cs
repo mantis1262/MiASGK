@@ -81,6 +81,19 @@ namespace Potok
             color[x][y] = BitConverter.ToUInt32(colors, 0);
         }
 
+        public void SetPixel(uint color, float depth, int x, int y)
+        {
+            this.depth[x][y] = depth;
+            this.color[x][y] = color;
+        }
+
+        public void SetPixel(byte R, byte G, byte B, float depth, int x, int y)
+        {
+            byte[] colors = new byte[4] { B, G, R, 255 };
+            color[x][y] = BitConverter.ToUInt32(colors, 0);
+            this.depth[x][y] = depth;
+        }
+
         public void SetColor(uint color)
         {
             for(int i = 0; i < this.color.Length; i++)

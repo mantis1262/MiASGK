@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Potok
+namespace Potok.Matematic
 {
     public static class Math
     {
