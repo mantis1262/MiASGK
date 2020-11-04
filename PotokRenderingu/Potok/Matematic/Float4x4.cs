@@ -42,13 +42,22 @@ namespace Potok.Matematic
             Matrix = matrix;
         }
 
-        public static Float4 Mul(Float4x4 m1, Float4 m2)
+        public static Float4 MulColumn(Float4x4 m1, Float4 m2)
         {
                 var m11 = (((m1.M11 * m2.X) + (m1.M12 * m2.Y)) + (m1.M13 * m2.Z)) + (m1.M14 * m2.V);
                 var m21 = (((m1.M21 * m2.X) + (m1.M22 * m2.Y)) + (m1.M23 * m2.Z)) + (m1.M24 * m2.V);
                 var m31 = (((m1.M31 * m2.X) + (m1.M32 * m2.Y)) + (m1.M33 * m2.Z)) + (m1.M34 * m2.V);
                 var m41 = (((m1.M41 * m2.X) + (m1.M42 * m2.Y)) + (m1.M43 * m2.Z)) + (m1.M44 * m2.V);
             return  new Float4(m11,m21,m31, m41); 
+        }
+
+        public static Float4 MulRow(Float4x4 m1, Float4 m2)
+        {
+            var m11 = (((m1.M11 * m2.X) + (m1.M21 * m2.Y)) + (m1.M31 * m2.Z)) + (m1.M41 * m2.V);
+            var m21 = (((m1.M12 * m2.X) + (m1.M22 * m2.Y)) + (m1.M32 * m2.Z)) + (m1.M42 * m2.V);
+            var m31 = (((m1.M13 * m2.X) + (m1.M23 * m2.Y)) + (m1.M33 * m2.Z)) + (m1.M43 * m2.V);
+            var m41 = (((m1.M14 * m2.X) + (m1.M24 * m2.Y)) + (m1.M34 * m2.Z)) + (m1.M44 * m2.V);
+            return new Float4(m11, m21, m31, m41);
         }
 
         public static Float4x4 Mul(Float4x4 m1, Float4x4 m2)
@@ -120,6 +129,17 @@ namespace Potok.Matematic
                         new Float4(0,0,0,1)
                     }
                 );
+        }
+
+        public override string ToString()
+        {
+            string result = "";
+            for(int i = 0; i<4; i++)
+            {
+                result += matrix[i].ToString();
+                result += "\n";
+            }
+            return result;
         }
     }
 }

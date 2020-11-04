@@ -97,6 +97,11 @@ namespace Potok.Matematic
         {
             return (this.X == ((Float4)obj).X && this.Y == ((Float4)obj).Y && this.Z == ((Float4)obj).Z && this.V == ((Float4)obj).V);
         }
+
+        public override string ToString()
+        {
+            return "{ " + X + "," + Y + "," + Z + "," + V + " }";
+        }
         #endregion Operators
     }
 }

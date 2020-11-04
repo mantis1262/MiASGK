@@ -26,12 +26,22 @@ namespace Potok
 
         public void SetPerspective(Camera camera)
         {
+
+
             camera.Fovy *= Math.PI / 360;
+            Console.WriteLine(camera.Fovy);
+
             float f = Math.Sin(camera.Fovy) / Math.Cos(camera.Fovy);
+            Console.WriteLine(f);
+
             _view2proj.Matrix[0] = new Float4(f / camera.Aspect, 0, 0, 0);
             _view2proj.Matrix[1] = new Float4(0, f, 0, 0);
-            _view2proj.Matrix[2] = new Float4(0, 0, (camera.Far + camera.Near) /(camera.Near - camera.Far), -1);
+           _view2proj.Matrix[2] = new Float4(0, 0, (camera.Far + camera.Near) /(camera.Near - camera.Far), -1);
             _view2proj.Matrix[3] = new Float4(0, 0, (2 * camera.Far * camera.Near) / (camera.Near - camera.Far), 0);
+
+            Console.WriteLine(_view2proj.ToString() + "\n");
+
+
         }
 
         public void SetLookAt(Camera camera)
@@ -117,8 +127,13 @@ namespace Potok
 
         public Float3 tr(Float3 v)
         {
-            Float4 r = Float4x4.Mul(_obj2proj, new Float4(v.X, v.Y, v.Z, 1));
+            Float4 r = Float4x4.MulRow(_view2proj, new Float4(v.X, v.Y, v.Z, 1));
+
+            Console.WriteLine(r.ToString() + "\n");
+
+
             return new Float3(r.X,r.Y,r.Z);
+
         }
 
     }
