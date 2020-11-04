@@ -45,6 +45,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Buffor.cs" />
+    <Compile Include="Cam\Camera.cs" />
     <Compile Include="Figury\Triangle.cs" />
     <Compile Include="Matematic\Float3.cs" />
     <Compile Include="Matematic\Float4.cs" />
