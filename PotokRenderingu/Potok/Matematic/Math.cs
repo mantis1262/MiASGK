@@ -9,7 +9,6 @@ namespace Potok.Matematic
     public static class Math
     {
 
-        public const float PI = (float)System.Math.PI;
 
         public static float Sin(float a)
         {

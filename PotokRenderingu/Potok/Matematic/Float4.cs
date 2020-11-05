@@ -100,7 +100,7 @@ namespace Potok.Matematic
 
         public override string ToString()
         {
-            return "{ " + X + "," + Y + "," + Z + "," + V + " }";
+            return "{ " + X + ";" + Y + ";" + Z + ";" + V + " }";
         }
         #endregion Operators
     }

@@ -28,10 +28,10 @@ namespace Potok
         {
 
 
-            camera.Fovy *= Math.PI / 360;
+            camera.Fovy = camera.Fovy * (float)(System.Math.PI / 360);
             Console.WriteLine(camera.Fovy);
 
-            float f = Math.Sin(camera.Fovy) / Math.Cos(camera.Fovy);
+            float f = (float)(System.Math.Cos(camera.Fovy) / System.Math.Sin(camera.Fovy));
             Console.WriteLine(f);
 
             _view2proj.Matrix[0] = new Float4(f / camera.Aspect, 0, 0, 0);
@@ -72,8 +72,8 @@ namespace Potok
 
         public void MulityByRotation(float a, Float3 rotation)
         {
-            float s = Math.Sin(a * Math.PI / 180); 
-            float c = Math.Cos(a * Math.PI / 180);
+            float s = Math.Sin((float)(a * System.Math.PI / 180)); 
+            float c = Math.Cos((float)(a * System.Math.PI / 180));
             rotation.Normalize();
 
             Float4x4 m = new Float4x4( new Float4[4]
@@ -127,12 +127,12 @@ namespace Potok
 
         public Float3 tr(Float3 v)
         {
-            Float4 r = Float4x4.MulRow(_view2proj, new Float4(v.X, v.Y, v.Z, 1));
+            Float4 r = Float4x4.MulCol(_view2proj, new Float4(v.X, v.Y, v.Z, 1));
 
             Console.WriteLine(r.ToString() + "\n");
 
 
-            return new Float3(r.X,r.Y,r.Z);
+            return new Float3(r.X/r.V,r.Y/r.V,r.Z/r.V);
 
         }
 
