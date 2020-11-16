@@ -7,7 +7,7 @@ using System.Drawing;
 using System.IO;
 namespace Potok
 {
-    class Buffor
+    public class Buffor
     {
         uint[][] _color;
         float[][] _depth;

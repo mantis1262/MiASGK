@@ -23,34 +23,81 @@ namespace Potok
             Rasteryzer rasteryzer = new Rasteryzer(buffor);
             VertexProcessor vertex = new VertexProcessor();
             Camera camera = new Camera(
-                new Float3(0, 0, 0.0f), //eye
-                new Float3(0.0f, 0.0f, 2.0f),   //center
-                new Float3(1, 1, 0),    //up
-                90, 1280.0f/720.0f, 1f, 1000);    //fovy,aspect, near, far
+                new Float3(0, 0f, 5.0f), //eye
+                new Float3(0.0f, 0.0f, 0.0f),   //center
+                new Float3(0, -1, 0),    //up
+                120, 1.0f, 1f, 1000);    //fovy,aspect, near, far
 
             vertex.SetPerspective(camera);
-          //  vertex.SetLookAt(camera);
+            vertex.SetLookAt(camera);
 
+           // vertex.MulityByTranslation(new Float3(0, 0, 0));
+              vertex.MulityByRotation(-5.0f, new Float3(1, 1, 0f));
+          //  vertex.MulityByTranslation(new Float3(0, 0, 0));
+           vertex.MulityByScale(new Float3(1f, 1.0f, 1.0f));
 
-        //   vertex.Transfrom();
+            vertex.Transfrom();
+
+            //front
+            rasteryzer.TriangleList.Add(new Triangle(
+               vertex.tr(new Float3(-1.0f, 1.0f, 1.0f)),
+               vertex.tr(new Float3(1.0f, 1.0f, 1.0f)),
+               vertex.tr(new Float3(-1.0f, -1.0f, 1.0f)),
+               new Float3(0f, 0.6f, 0), new Float3(0, 1f, 0), new Float3(0, 0.8f, 0)));
 
             rasteryzer.TriangleList.Add(new Triangle(
-              vertex.tr(new Float3(-2.5f, -0.5f, -3.2f)),
-               vertex.tr(new Float3(0, 0.5f, -0.5f)),
-               vertex.tr(new Float3(0.5f, -0.5f,-1.0f)),
-               new Float3(1.0f, 0, 0), new Float3(0, 1.0f, 0), new Float3(0, 0, 0.3f)));
+               vertex.tr(new Float3(1.0f, 1.0f, 1.0f)),
+               vertex.tr(new Float3(1.0f, - 1.0f, 1.0f)),
+               vertex.tr(new Float3(-1.0f, -1.0f, 1.0f)),
+               new Float3(0f, 0.9f, 0), new Float3(0, 1f, 0), new Float3(0, 0.8f, 0)));
 
+            //top
             rasteryzer.TriangleList.Add(new Triangle(
-                vertex.tr(new Float3(-4.0f, -3f, -3.2f)),
-                vertex.tr(new Float3(3f, 5.9f, -0.2f)),
-                vertex.tr(new Float3(-0.5f, -0.5f, -1.1f)),
-               new Float3(1.0f, 0, 1), new Float3(1.0f, 0.3f, 0), new Float3(0, 1.0f, 1.0f)));
+              vertex.tr(new Float3(-1.0f, -1.0f, 1.0f)),
+              vertex.tr(new Float3(-1.0f, -1.0f, -1.0f)),
+              vertex.tr(new Float3(1.0f, -1.0f, 1.0f)),
+               new Float3(0, 0, 0.8f), new Float3(0, 0f, 0.9f), new Float3(0, 0, 1.0f)));
 
-            rasteryzer.TriangleList.Add(new Triangle(
-               vertex.tr(new Float3(-1.1f, 0.5f, -0.9f)),
-                vertex.tr(new Float3(0.6f, 0f, -2.1f)),
-                vertex.tr(new Float3(-0.9f, -1.1f, -0.5f)),
-               new Float3(1.0f, 0, 0), new Float3(0.7f, 0.8f, 0.4f), new Float3(0.0f, 0.0f, 0.0f)));
+            //rasteryzer.TriangleList.Add(new Triangle(
+             //vertex.tr(new Float3(-1.0f, 1.0f, -1.0f)),
+             //  vertex.tr(new Float3(-1.0f, 1.0f, 1.0f)),
+             // vertex.tr(new Float3(1.0f, 1.0f, 1.0f)),
+            //  new Float3(0, 0, 0.8f), new Float3(0, 0f, 0.9f), new Float3(0, 0, 1.0f)));
+
+            //rasteryzer.TriangleList.Add(new Triangle(
+            // vertex.tr(new Float3(-1.1f, 0.5f, -1.0f)),
+            // vertex.tr(new Float3(-1.1f, 0.5f, -2.0f)),
+            // vertex.tr(new Float3(-3.5f, -0.5f, -1.5f)),
+            // new Float3(1.0f, 0, 0), new Float3(0.8f, 0.0f, 0), new Float3(0.9f, 0, 0.0f)));
+
+            ////
+
+            vertex.SetIdentity();
+           // vertex.MulityByTranslation(new Float3(0, 0, 0));
+           // vertex.MulityByRotation(30.0f, new Float3(0, 0, 1f));
+           // vertex.MulityByTranslation(new Float3(0, 0, 0));
+           // vertex.MulityByScale(new Float3(2f, 2.0f, 1.0f));
+            vertex.Transfrom();
+
+
+            //rasteryzer.TriangleList.Add(new Triangle(
+            //  vertex.tr(new Float3(2.5f, -1.5f, -3.5f)),
+            //   vertex.tr(new Float3(3f, 1.5f, -3.0f)),
+            //   vertex.tr(new Float3(3.5f, -1.5f, -3.0f)),
+            //   new Float3(0, 0, 0.8f), new Float3(0, 0f, 0.9f), new Float3(0, 0, 1.0f)));
+
+            //rasteryzer.TriangleList.Add(new Triangle(
+            //  vertex.tr(new Float3(2.5f, -1.5f, -3.5f)),
+            //   vertex.tr(new Float3(3f, 1.5f, -4.0f)),
+            //   vertex.tr(new Float3(3.5f, -1.5f, -3.0f)),
+            //   new Float3(0f, 0.9f, 0), new Float3(0, 1f, 0), new Float3(0, 0.8f, 0)));
+
+            //rasteryzer.TriangleList.Add(new Triangle(
+            // vertex.tr(new Float3(-2.1f, 1.5f, -3.0f)),
+            // vertex.tr(new Float3(-2.1f, 1.5f, -4.0f)),
+            // vertex.tr(new Float3(-4.5f, -0.5f, -3.5f)),
+            // new Float3(1.0f, 0, 0), new Float3(0.8f, 0.0f, 0), new Float3(0.9f, 0, 0.0f)));
+
 
             rasteryzer.Draw();
 

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace Potok.Matematic
 {
-    class Float4x4
+    public class Float4x4
     {
         private Float4[] matrix;
         #region properties
         public Float4[] Matrix { get => matrix; set => matrix = value; }
-        public float M11 { get => matrix[0].X; }
+        public float M11 { get => matrix[0].X; }  //KW
         public float M12 { get => matrix[0].Y; }
         public float M13 { get => matrix[0].Z; }
         public float M14 { get => matrix[0].V; }
@@ -44,10 +44,10 @@ namespace Potok.Matematic
 
         public static Float4 MulCol(Float4x4 m1, Float4 m2)
         {
-            var m11 = (((m1.M11 * m2.X) + (m1.M21 * m2.Y)) + (m1.M31 * m2.Z)) + (m1.M41 * m2.V);
-            var m21 = (((m1.M12 * m2.X) + (m1.M22 * m2.Y)) + (m1.M32 * m2.Z)) + (m1.M42 * m2.V);
-            var m31 = (((m1.M13 * m2.X) + (m1.M23 * m2.Y)) + (m1.M33 * m2.Z)) + (m1.M43 * m2.V);
-            var m41 = (((m1.M14 * m2.X) + (m1.M24 * m2.Y)) + (m1.M34 * m2.Z)) + (m1.M44 * m2.V);
+            var m11 = (((m1.M11 * m2.X) + (m1.M12 * m2.Y)) + (m1.M13 * m2.Z)) + (m1.M14 * m2.V);
+            var m21 = (((m1.M21 * m2.X) + (m1.M22 * m2.Y)) + (m1.M23 * m2.Z)) + (m1.M24 * m2.V);
+            var m31 = (((m1.M31 * m2.X) + (m1.M32 * m2.Y)) + (m1.M33 * m2.Z)) + (m1.M34 * m2.V);
+            var m41 = (((m1.M41 * m2.X) + (m1.M42 * m2.Y)) + (m1.M43 * m2.Z)) + (m1.M44 * m2.V);
             return new Float4(m11, m21, m31, m41);
         }
 

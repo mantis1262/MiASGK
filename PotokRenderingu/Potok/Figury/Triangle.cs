@@ -8,7 +8,7 @@ using Math = Potok.Matematic.Math;
 
 namespace Potok.Figury
 {
-    class Triangle
+   public class Triangle
     {
         Float3 _a, _b, _c;
         Float3 _ac, _bc, _cc;

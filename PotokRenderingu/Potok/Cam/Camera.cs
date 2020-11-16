@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Potok.Cam
 {
-    class Camera
+    public class Camera
     {
 
         Float3 _eye;

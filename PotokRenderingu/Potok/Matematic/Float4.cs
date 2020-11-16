@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Potok.Matematic
 {
-    class Float4
+    public class Float4
     {
         private float _x;
         private float _y;

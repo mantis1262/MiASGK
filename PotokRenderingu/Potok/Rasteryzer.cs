@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Potok
 {
-    class Rasteryzer
+    public class Rasteryzer
     {
 
         Buffor _buffor;
@@ -32,6 +32,12 @@ namespace Potok
         {
             foreach (Triangle triangle in _triangleList)
                     triangle.Draw(_buffor);
-        }       
+        }  
+        
+
+        public void Clean()
+        {
+            _triangleList.Clear();
+        }
     }
 }
