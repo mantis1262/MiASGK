@@ -29,25 +29,15 @@ namespace Potok.Matematic
 
         public void Normalize()
         {
-            Float3 newVec = new Float3(_x, _y, _z);
-            float n = Length();
-            if (n != 0)
-                newVec = newVec / n;
-
-            this.X = newVec.X;
-            this.Y = newVec.Y;
-            this.Z = newVec.Z;
-        }
-
-
-        public float LengthSquared()
-        {
-            return _x * _x + _y * _y + _z * _z;
+            float length = Length();
+            X = X / length;
+            Y = Y / length;
+            Z = Z / length;
         }
 
         public float Length()
         {
-            return (float)System.Math.Sqrt(LengthSquared());
+            return (float)System.Math.Sqrt(_x * _x + _y * _y + _z * _z);
         }
 
         public float Dot(Float3 v)
@@ -57,7 +47,11 @@ namespace Potok.Matematic
 
         public Float3 Cross(Float3 v)
         {
-            return new Float3(_y * v.Z - _z * v.Y, _z * v.X - _x * v.Z, _x * v.Y - _y * v.X);
+            return new Float3
+                (
+                _y * v.Z - _z * v.Y,
+                _z * v.X - _x * v.Z,
+                _x * v.Y - _y * v.X);
         }
 
         #region Operators

@@ -11,24 +11,24 @@ namespace Potok.Matematic
         private Float4[] matrix;
         #region properties
         public Float4[] Matrix { get => matrix; set => matrix = value; }
-        public float M11 { get => matrix[0].X; }  //KW
-        public float M12 { get => matrix[0].Y; }
-        public float M13 { get => matrix[0].Z; }
-        public float M14 { get => matrix[0].V; }
+        public float M11 { get => matrix[0].X; }  //WK
+        public float M12 { get => matrix[1].X; }
+        public float M13 { get => matrix[2].X; }
+        public float M14 { get => matrix[3].X; }
 
-        public float M21 { get => matrix[1].X; }
+        public float M21 { get => matrix[0].Y; }
         public float M22 { get => matrix[1].Y; }
-        public float M23 { get => matrix[1].Z; }
-        public float M24 { get => matrix[1].V; }
+        public float M23 { get => matrix[2].Y; }
+        public float M24 { get => matrix[3].Y; }
 
-        public float M31 { get => matrix[2].X; }
-        public float M32 { get => matrix[2].Y; }
+        public float M31 { get => matrix[0].Z; }
+        public float M32 { get => matrix[1].Z; }
         public float M33 { get => matrix[2].Z; }
-        public float M34 { get => matrix[2].V; }
+        public float M34 { get => matrix[3].Z; }
 
-        public float M41 { get => matrix[3].X; }
-        public float M42 { get => matrix[3].Y; }
-        public float M43 { get => matrix[3].Z; }
+        public float M41 { get => matrix[0].V; }
+        public float M42 { get => matrix[1].V; }
+        public float M43 { get => matrix[2].V; }
         public float M44 { get => matrix[3].V; }
 
         #endregion
@@ -52,31 +52,34 @@ namespace Potok.Matematic
         }
 
         public static Float4x4 Mul(Float4x4 m1, Float4x4 m2)
-        {
-            var m11 = (((m1.M11 * m2.M11) + (m1.M12 * m2.M21)) + (m1.M13 * m2.M31)) + (m1.M14 * m2.M41);
-            var m12 = (((m1.M11 * m2.M12) + (m1.M12 * m2.M22)) + (m1.M13 * m2.M32)) + (m1.M14 * m2.M42);
-            var m13 = (((m1.M11 * m2.M13) + (m1.M12 * m2.M23)) + (m1.M13 * m2.M33)) + (m1.M14 * m2.M43);
-            var m14 = (((m1.M11 * m2.M14) + (m1.M12 * m2.M24)) + (m1.M13 * m2.M34)) + (m1.M14 * m2.M44);
-            var m21 = (((m1.M21 * m2.M11) + (m1.M22 * m2.M21)) + (m1.M23 * m2.M31)) + (m1.M24 * m2.M41);
-            var m22 = (((m1.M21 * m2.M12) + (m1.M22 * m2.M22)) + (m1.M23 * m2.M32)) + (m1.M24 * m2.M42);
-            var m23 = (((m1.M21 * m2.M13) + (m1.M22 * m2.M23)) + (m1.M23 * m2.M33)) + (m1.M24 * m2.M43);
-            var m24 = (((m1.M21 * m2.M14) + (m1.M22 * m2.M24)) + (m1.M23 * m2.M34)) + (m1.M24 * m2.M44);
-            var m31 = (((m1.M31 * m2.M11) + (m1.M32 * m2.M21)) + (m1.M33 * m2.M31)) + (m1.M34 * m2.M41);
-            var m32 = (((m1.M31 * m2.M12) + (m1.M32 * m2.M22)) + (m1.M33 * m2.M32)) + (m1.M34 * m2.M42);
-            var m33 = (((m1.M31 * m2.M13) + (m1.M32 * m2.M23)) + (m1.M33 * m2.M33)) + (m1.M34 * m2.M43);
-            var m34 = (((m1.M31 * m2.M14) + (m1.M32 * m2.M24)) + (m1.M33 * m2.M34)) + (m1.M34 * m2.M44);
-            var m41 = (((m1.M41 * m2.M11) + (m1.M42 * m2.M21)) + (m1.M43 * m2.M31)) + (m1.M44 * m2.M41);
-            var m42 = (((m1.M41 * m2.M12) + (m1.M42 * m2.M22)) + (m1.M43 * m2.M32)) + (m1.M44 * m2.M42);
-            var m43 = (((m1.M41 * m2.M13) + (m1.M42 * m2.M23)) + (m1.M43 * m2.M33)) + (m1.M44 * m2.M43);
-            var m44 = (((m1.M41 * m2.M14) + (m1.M42 * m2.M24)) + (m1.M43 * m2.M34)) + (m1.M44 * m2.M44);
+        { 
+            var m11 = m1.M11 * m2.M11 + m1.M12 * m2.M21 + m1.M13 * m2.M31 + m1.M14 * m2.M41;
+            var m12 = m1.M11 * m2.M12 + m1.M12 * m2.M22 + m1.M13 * m2.M32 + m1.M14 * m2.M42;
+            var m13 = m1.M11 * m2.M13 + m1.M12 * m2.M23 + m1.M13 * m2.M33 + m1.M14 * m2.M43;
+            var m14 = m1.M11 * m2.M14 + m1.M12 * m2.M24 + m1.M13 * m2.M34 + m1.M14 * m2.M44;
+
+            var m21 = m1.M21 * m2.M11 + m1.M22 * m2.M21 + m1.M23 * m2.M31 + m1.M24 * m2.M41;
+            var m22 = m1.M21 * m2.M12 + m1.M22 * m2.M22 + m1.M23 * m2.M32 + m1.M24 * m2.M42;
+            var m23 = m1.M21 * m2.M13 + m1.M22 * m2.M23 + m1.M23 * m2.M33 + m1.M24 * m2.M43;
+            var m24 = m1.M21 * m2.M14 + m1.M22 * m2.M24 + m1.M23 * m2.M34 + m1.M24 * m2.M44;
+
+            var m31 = m1.M31 * m2.M11 + m1.M32 * m2.M21 + m1.M33 * m2.M31 + m1.M34 * m2.M41;
+            var m32 = m1.M31 * m2.M12 + m1.M32 * m2.M22 + m1.M33 * m2.M32 + m1.M34 * m2.M42;
+            var m33 = m1.M31 * m2.M13 + m1.M32 * m2.M23 + m1.M33 * m2.M33 + m1.M34 * m2.M43;
+            var m34 = m1.M31 * m2.M14 + m1.M32 * m2.M24 + m1.M33 * m2.M34 + m1.M34 * m2.M44;
+
+            var m41 = m1.M41 * m2.M11 + m1.M42 * m2.M21 + m1.M43 * m2.M31 + m1.M44 * m2.M41;
+            var m42 = m1.M41 * m2.M12 + m1.M42 * m2.M22 + m1.M43 * m2.M32 + m1.M44 * m2.M42;
+            var m43 = m1.M41 * m2.M13 + m1.M42 * m2.M23 + m1.M43 * m2.M33 + m1.M44 * m2.M43;
+            var m44 = m1.M41 * m2.M14 + m1.M42 * m2.M24 + m1.M43 * m2.M34 + m1.M44 * m2.M44;
             return new Float4x4
                     (
                         new Float4[4]
                         {
-                                new Float4(m11,m12,m13,m14),
-                                new Float4(m21,m22,m23,m24),
-                                new Float4(m31,m32,m33,m34),
-                                new Float4(m41,m42,m43,m44)
+                                new Float4(m11,m21,m31,m41),
+                                new Float4(m12,m22,m32,m42),
+                                new Float4(m13,m23,m33,m43),
+                                new Float4(m14,m24,m34,m44)
 
                         }
                     );
@@ -114,10 +117,10 @@ namespace Potok.Matematic
                 (
                 new Float4[4]
                     {
-                        new Float4(1,0,0,0),
-                        new Float4(0,1,0,0),
-                        new Float4(0,0,1,0),
-                        new Float4(0,0,0,1)
+                        new Float4(1f,0,0,0),
+                        new Float4(0,1f,0,0),
+                        new Float4(0,0,1f,0),
+                        new Float4(0,0,0,1f)
                     }
                 );
         }

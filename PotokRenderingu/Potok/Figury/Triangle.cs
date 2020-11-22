@@ -23,6 +23,16 @@ namespace Potok.Figury
             _cc = cc;
         }
 
+        public Triangle(Float3 a, Float3 b, Float3 c, Float3 color)
+        {
+            _a = a;
+            _b = b;
+            _c = c;
+            _ac = color;
+            _bc = color;
+            _cc = color;
+        }
+
         public Triangle(Float3 a, Float3 b, Float3 c, byte R, byte G, byte B)
         {
             _a = a;

@@ -5,11 +5,13 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Drawing;
 using System.IO;
+using Potok.Matematic;
+
 namespace Potok
 {
     public class Buffor
     {
-        uint[][] _color;
+        Float3[][] _color;
         float[][] _depth;
         int _width;
         int _heigth;
@@ -23,7 +25,7 @@ namespace Potok
         public int MinY { get => _minY;}
         public int MaxX { get => _maxX;}
         public int MaxY { get => _maxY;}
-        public uint[][] Color { get => _color; }
+        public Float3[][] Color { get => _color; }
         public float[][] Depth { get => _depth; }
 
         public Buffor(int w, int h)
@@ -31,10 +33,10 @@ namespace Potok
             _width = w;
             _heigth = h;
             _lenght = w * h;
-            _color = new uint[_width][];
+            _color = new Float3[_width][];
             for (int i = 0; i < _color.Length; i++)
             {
-                _color[i] = new uint[_heigth];
+                _color[i] = new Float3[_heigth];
             }
 
             _depth = new float[_width][];
@@ -54,10 +56,10 @@ namespace Potok
             _width = w;
             _heigth = h;
             _lenght = w * h;
-            _color = new uint[_width][];
+            _color = new Float3[_width][];
             for (int i = 0; i < _color.Length; i++)
             {
-                _color[i] = new uint[_heigth];
+                _color[i] = new Float3[_heigth];
             }
             _depth = new float[_width][];
             for (int i = 0; i < _depth.Length; i++)
@@ -70,50 +72,28 @@ namespace Potok
             _maxY = _heigth - 1;
         }
 
-        public void SetPixel(uint color, int x, int y)
-        {
-            this._color[x][y] = color;
-        }
 
         public void SetPixel(byte R, byte G, byte B, int x, int y)
         {
             byte[] colors = new byte[4] { B, G, R, 255 };
-            _color[x][y] = BitConverter.ToUInt32(colors, 0);
-        }
-
-        public void SetPixel(uint color, float depth, int x, int y)
-        {
-            this._depth[x][y] = depth;
-            this._color[x][y] = color;
+            _color[x][y] = new Float3(R, G, B);
         }
 
         public void SetPixel(byte R, byte G, byte B, float depth, int x, int y)
         {
             byte[] colors = new byte[4] { B, G, R, 255 };
-            _color[x][y] = BitConverter.ToUInt32(colors, 0);
+            _color[x][y] = new Float3(R, G, B);
             this._depth[x][y] = depth;
-        }
-
-        public void SetColor(uint color)
-        {
-            for(int i = 0; i < this._color.Length; i++)
-            {
-                for (int j = 0; j < this._color[i].Length; j++)
-                {
-                    this._color[i][j] = color;
-                }
-            }
         }
 
         public void SetColor(byte R, byte G, byte B)
         {
-            byte[] colors = new byte[4] { B, G, R, 255 };
-            uint col = BitConverter.ToUInt32(colors, 0);
+            Float3 col = new Float3(R, G, B);
             for (int i = 0; i < this._color.Length; i++)
             {
                 for (int j = 0; j < this._color[i].Length; j++)
                 {
-                    _color[i][j] = col; 
+                    _color[i][j] = col;
                 }
             }
         }
@@ -131,11 +111,12 @@ namespace Potok
 
         public void ClearColor()
         {
+            Float3 ClaerColor = new Float3(0, 0, 0);
             for (int i = 0; i < _color.Length; i++)
             {
                 for (int j = 0; j < this._color[i].Length; j++)
                 {
-                    _color[i][j] = 0xFF000000;
+                    _color[i][j] = ClaerColor;
                 }
             }
         }
@@ -159,8 +140,7 @@ namespace Potok
             {
                 for (int j = 0; j < _heigth; j++)
                 {
-                    byte[] col = BitConverter.GetBytes(_color[i][j]);
-                    bitmap.SetPixel(i, j, System.Drawing.Color.FromArgb(col[3], col[2], col[1], col[0]));
+                    bitmap.SetPixel(i, j, System.Drawing.Color.FromArgb((int)Color[i][j].X, (int)Color[i][j].Y, (int)Color[i][j].Z) );
                 }
             }
             bitmap.Save(filname);
