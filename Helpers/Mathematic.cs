@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Potok.Matematic
+namespace Potok.Helper
 {
-    public static class Math
+    public static class Mathematic
     {
 
 

@@ -1,15 +1,13 @@
-﻿using Potok.Matematic;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Potok.Cam
+namespace Potok.Models
 {
-    public class Camera
+   public class Camera
     {
-
         Float3 _eye;
         Float3 _center;
         Float3 _up;
@@ -36,8 +34,5 @@ namespace Potok.Cam
             _near = near;
             _far = far;
         }
-
-
-
     }
 }
