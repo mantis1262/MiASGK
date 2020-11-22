@@ -30,6 +30,13 @@ namespace Potok
             Obj2view = Float4x4.Identity;
         }
 
+        public void SetIndentityObj()
+        {
+            Obj2world = Float4x4.Identity;
+            Obj2proj = Float4x4.Identity;
+            Obj2view = Float4x4.Identity;
+        }
+
         public void SetIdentity()
         {
             Obj2world = Float4x4.Identity;
@@ -117,74 +124,14 @@ namespace Potok
         {
             Obj2view = World2view * Obj2world;
             Obj2proj = View2proj * Obj2view;
-
-
-            Console.WriteLine( "Obj2world\n" +  PrintMatrix("Obj2world"));
-            Console.WriteLine("World2view\n" + PrintMatrix("World2view"));
-            Console.WriteLine("View2proj\n" + PrintMatrix("View2proj"));
-            Console.WriteLine("Obj2proj\n" + PrintMatrix("Obj2proj"));
-            Console.WriteLine("Obj2view\n" + PrintMatrix("Obj2view"));
         }
 
         public Float3 Tr(Float3 v)
         {
             Float4 r = Obj2proj * (new Float4(v, 1));
 
-
-
-            float x1 = r.X / r.W;
-            float y1 = r.Y / r.W;
-            float z1 = r.Z / r.W;
-
-            Console.WriteLine("{" + r.X + ";" + r.Y + ";" + r.Z + ";" + r.W+ "}");
-
             return new Float3(r.X / r.W, r.Y / r.W, r.Z / r.W);
         }
 
-        private String Print(Float4x4 matrix)
-        {
-            return String.Format
-                (
-                    "{0}, {1}, {2}, {3}\n" +
-                    "{4}, {5}, {6}, {7}\n" +
-                    "{8}, {9}, {10}, {11}\n" +
-                    "{12}, {13}, {14}, {15}\n",
-                    matrix.M11, matrix.M12, matrix.M13, matrix.M14,
-                    matrix.M21, matrix.M22, matrix.M23, matrix.M24,
-                    matrix.M31, matrix.M32, matrix.M33, matrix.M34,
-                    matrix.M41, matrix.M42, matrix.M43, matrix.M44
-                );
-        }
-
-        public String PrintMatrix(string matrixType)
-        {
-            switch(matrixType)
-            {
-                case "Obj2world":
-                    {
-                        return Print(Obj2world);
-                    }
-                case "World2view":
-                    {
-                        return Print(World2view);
-                    }
-                case "View2proj":
-                    {
-                        return Print(View2proj);
-                    }
-                case "Obj2proj":
-                    {
-                        return Print(Obj2proj);
-                    }
-                case "Obj2view":
-                    {
-                        return Print(Obj2view);
-                    }
-                default:
-                    {
-                        return String.Empty;
-                    }
-            }
-        }
     }
 }

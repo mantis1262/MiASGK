@@ -6,8 +6,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{FF685C52-6B1A-4FCF-90FC-9EFF22283266}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>MASGK</RootNamespace>
-    <AssemblyName>MASGK</AssemblyName>
+    <RootNamespace>Potok</RootNamespace>
+    <AssemblyName>Potok</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>

@@ -35,10 +35,10 @@ namespace Potok
             float y2 = (v2.Y + 1) * _buffer.Heigth * HALF_FLOAT;
             float y3 = (v3.Y + 1) * _buffer.Heigth * HALF_FLOAT;
 
-            int minX = (int)Math.Min(Mathematic.Min3(x1, x2, x3), _buffer.MinX);
-            int maxX = (int)Math.Min(Mathematic.Max3(x1, x2, x3), _buffer.MaxX);
-            int minY = (int)Math.Max(Mathematic.Min3(y1, y2, y3), _buffer.MinY);
-            int maxY = (int)Math.Min(Mathematic.Max3(y1, y2, y3), _buffer.MaxY);
+            int minX = (int)Mathematic.Max(Mathematic.Min3(x1, x2, x3), _buffer.MinX);
+            int maxX = (int)Mathematic.Min(Mathematic.Max3(x1, x2, x3), _buffer.MaxX);
+            int minY = (int)Mathematic.Max(Mathematic.Min3(y1, y2, y3), _buffer.MinY);
+            int maxY = (int)Mathematic.Min(Mathematic.Max3(y1, y2, y3), _buffer.MaxY);
 
             float x12 = x1 - x2;
             float x23 = x2 - x3;
