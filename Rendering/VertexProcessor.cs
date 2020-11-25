@@ -50,10 +50,10 @@ namespace Potok
         {
             camera.Fovy *= (float)(Math.PI / 360); //FOVy/2
             float f = (float)(Math.Cos(camera.Fovy) / Math.Sin(camera.Fovy));
-            View2proj.SetColumn(0, new Float4(f / camera.Aspect, 0, 0, 0));
-            View2proj.SetColumn(1, new Float4(0, f, 0, 0));
-            View2proj.SetColumn(2, new Float4(0, 0, (camera.Far + camera.Near) / (camera.Near - camera.Far), -1));
-            View2proj.SetColumn(3, new Float4(0, 0, (2 * camera.Far * camera.Near) / (camera.Near - camera.Far), 0));
+            View2proj.Matrix[0] = new Float4(f / camera.Aspect, 0, 0, 0);
+            View2proj.Matrix[1] = new Float4(0, f, 0, 0);
+            View2proj.Matrix[2] = new Float4(0, 0, (camera.Far + camera.Near) / (camera.Near - camera.Far), -1);
+            View2proj.Matrix[3] = new Float4(0, 0, (2 * camera.Far * camera.Near) / (camera.Near - camera.Far), 0);
         }
 
         public void SetLookAt(Camera camera)
@@ -63,12 +63,12 @@ namespace Potok
             camera.Up.Normalize();
             Float3 s = f.Cross(camera.Up);
             Float3 u = s.Cross(f);
-            World2view.SetColumn(0, new Float4(s.X, u.X, -f.X, 0));
-            World2view.SetColumn(1, new Float4(s.Y, u.Y, -f.Y, 0));
-            World2view.SetColumn(2, new Float4(s.Z, u.Z, -f.Z, 0));
-            World2view.SetColumn(3, new Float4(0, 0, 0, 1));
+            World2view.Matrix[0] = new Float4(s.X, u.X, -f.X, 0);
+            World2view.Matrix[1] = new Float4(s.Y, u.Y, -f.Y, 0);
+            World2view.Matrix[2] = new Float4(s.Z, u.Z, -f.Z, 0);
+            World2view.Matrix[3] = new Float4(0, 0, 0, 1);
             Float4x4 m = Float4x4.Identity;
-            m.SetColumn(3, new Float4(-camera.Eye, 1));
+            m.Matrix[3] = new Float4(-camera.Eye, 1);
             World2view = World2view * m;
         }
 
@@ -92,31 +92,31 @@ namespace Potok
             float c = (float)Math.Cos(a * Math.PI / 180);
             v.Normalize();
             Float4x4 m = Float4x4.Identity;
-            m.SetColumn(0, new Float4
+            m.Matrix[0] = new Float4
                 (
                     v.X * v.X * (1 - c) + c,
                     v.X * v.Y * (1 - c) + v.Z * s,
                     v.X * v.Z * (1 - c) - v.Y * s,
                     0
-                ));
-            m.SetColumn(1, new Float4
+                );
+            m.Matrix[1] = new Float4
                 (
                     v.X * v.Y * (1 - c) - v.Z * s,
                     v.Y * v.Y * (1 - c) + c,
                     v.Y * v.Z * (1 - c) + v.X * s,
                     0
-                ));
-            m.SetColumn(2, new Float4
+                );
+            m.Matrix[2] = new Float4
                 (
                     v.X * v.Z * (1 - c) + v.Y * s,
                     v.Y * v.Z * (1 - c) - v.X * s,
                     v.Z * v.Z * (1 - c) + c,
                     0
-                ));
-            m.SetColumn(3, new Float4
+                );
+            m.Matrix[3] = new Float4
                 (
                     0, 0, 0, 1
-                ));
+                );
             Obj2world = m * Obj2world;
         }
 

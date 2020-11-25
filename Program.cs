@@ -22,7 +22,7 @@ namespace Potok
             Rasterizer rasterizer = new Rasterizer(buffer);
 
             Camera camera = new Camera(
-             new Float3(-2f,3f, 5.0f), //eye
+             new Float3(0f,0f, 5.0f), //eye
              new Float3(0.0f, 0.0f, 0.0f),   //center
              new Float3(0, 1f, 0),    //up
              90f, 1.0f / 1.0f, 1f, 1000f);
@@ -304,9 +304,9 @@ namespace Potok
             #region cube3
             vertexProcessor1.SetIndentityObj();
             vertexProcessor1.MultByTranslation(new Float3(0f, -3f, 0));
-            vertexProcessor1.MultByRotation(20f, new Float3(0, 0, 1));
+           // vertexProcessor1.MultByRotation(20f, new Float3(0, 0, 1));
           //  vertexProcessor1.MultByTranslation(new Float3(0f, 1f, 0));
-            vertexProcessor1.MultByScale(new Float3(1.5f, 0.5f, .5f));
+            //vertexProcessor1.MultByScale(new Float3(1.5f, 0.5f, .5f));
             vertexProcessor1.Transform();
 
 
@@ -437,7 +437,7 @@ namespace Potok
             #endregion
 
             DateTime date = DateTime.Now;
-            buffer.Save(date.Hour.ToString() + "_" + date.Minute.ToString() +  "_picture.png");
+            buffer.Save(date.Hour.ToString() + "_" + date.Minute.ToString() + "_" + date.Second.ToString() +  "_picture.png");
         }
 
     }
