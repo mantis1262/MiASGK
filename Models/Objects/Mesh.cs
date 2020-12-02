@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Potok.Models.Maths;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,37 +9,41 @@ namespace Potok
 {
     public class Mesh
     {
-        public string Name;
-        public List<Triangle> Triangles;
-        public string Group;
-        public string MtlLib;
-        public string Mtl;
+        int vSize, tSize;
+        Vertex[] _verticles;
+        Int3[] _indices;
+
+        public int VSize { get => vSize; set => vSize = value; }
+        public int TSize { get => tSize; set => tSize = value; }
+        public Vertex[] Verticles { get => _verticles; set => _verticles = value; }
+        public Int3[] Indices { get => _indices; set => _indices = value; }
+
 
         public Mesh()
         {
-            Name = string.Empty;
-            Triangles = new List<Triangle>();
-            Group = string.Empty;
-            MtlLib = string.Empty;
-            Mtl = string.Empty;
         }
 
-        public Mesh(List<Triangle> triangles)
+        public Mesh(int vSize, int tSize, Vertex[] verticles, Int3[] indices)
         {
-            Name = string.Empty;
-            Triangles = triangles;
-            Group = string.Empty;
-            MtlLib = string.Empty;
-            Mtl = string.Empty;
+            this.vSize = vSize;
+            this.tSize = tSize;
+            this._verticles = verticles;
+            this._indices = indices;
         }
 
-        public Mesh(string name, string group, List<Triangle> triangles, string mtlLib, string mtl)
+
+        public void draw(Rasterizer r, VertexProcessor vp)
         {
-            Name = name;
-            Group = group;
-            Triangles = triangles;
-            MtlLib = mtlLib;
-            Mtl = mtl;
+            for (int i = 0; i < tSize; ++i)
+            {
+                r.Triangle(
+                    vp.Tr(_verticles[_indices[i].A].Position),
+                    vp.Tr(_verticles[_indices[i].B].Position),
+                    vp.Tr(_verticles[_indices[i].C].Position),
+                    new LightIntensity(1, 0, 0), new LightIntensity(0, 1, 0), new LightIntensity(0, 0, 1)
+                    );
+
+            }
         }
     }
 }
