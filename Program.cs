@@ -23,421 +23,74 @@ namespace Potok
             Rasterizer rasterizer = new Rasterizer(buffer);
 
             Camera camera = new Camera(
-             new Float3(0f,0f, 5.0f), //eye
-             new Float3(0.0f, 0.0f, 0.0f),   //center
+             new Float3(0f,-2.0f, 5.0f), //eye
+             new Float3(0.0f, -1.0f, 0.0f),   //center
              new Float3(0, 1f, 0),    //up
              60f, 1.0f / 1.0f, 1f, 1000f);
 
             VertexProcessor vertexProcessor1 = new VertexProcessor();
             vertexProcessor1.SetPerspective(camera);
             vertexProcessor1.SetLookAt(camera);
+            vertexProcessor1.MultByTranslation(new Float3(2f, 0f, 0));
             vertexProcessor1.Transform();
 
-            Sphere sphere = new Sphere(12, 24);
-            sphere.draw(rasterizer, vertexProcessor1);
+            Sphere sphere = new Sphere(4, 8);
+            sphere.Draw(rasterizer, vertexProcessor1);
+
+            vertexProcessor1.SetIndentityObj();
+            vertexProcessor1.MultByTranslation(new Float3(-1f, 2f, 0));
+            vertexProcessor1.MultByRotation(45f, new Float3(1, 0, 0));
+            //vertexProcessor1.MultByRotation(45f, new Float3(0, 0, 1));
+            vertexProcessor1.Transform();
+
+            Cone cone = new Cone(16, 1f, 2f);
+            cone.Draw(rasterizer,vertexProcessor1);
+
+            vertexProcessor1.SetIndentityObj();
+          //  vertexProcessor1.MultByTranslation(new Float3(1f, 1f, 0));
+            //vertexProcessor1.MultByRotation(25f, new Float3(1, 0, 0));
+            //vertexProcessor1.MultByRotation(45f, new Float3(0, 0, 1));
+            vertexProcessor1.Transform();
+
+           // Torus torus = new Torus(12, 40, 1f, 2f);
+          //  torus.Draw(rasterizer, vertexProcessor1);
 
             #region cube1
 
-          //  vertexProcessor1.MultByTranslation(new Float3(2f, 0f, 0));
-          //  //vertexProcessor1.MultByRotation(20f, new Float3(1, 1, 1));
-          //  vertexProcessor1.MultByTranslation(new Float3(0f, 1f, 0));
-          //  vertexProcessor1.MultByScale(new Float3(.5f, .5f, .5f));
-          //  vertexProcessor1.Transform();
+            //  vertexProcessor1.MultByTranslation(new Float3(2f, 0f, 0));
+            //  //vertexProcessor1.MultByRotation(20f, new Float3(1, 1, 1));
+            //  vertexProcessor1.MultByTranslation(new Float3(0f, 1f, 0));
+            //  vertexProcessor1.MultByScale(new Float3(.5f, .5f, .5f));
+            //  vertexProcessor1.Transform();
 
-            
-          //  //cube
-          //  rasterizer.Triangle
-          //  (
-          //      vertexProcessor1.Tr(new Float3(-1f, 1f, 1f)),
-          //      vertexProcessor1.Tr(new Float3(1f, 1f, 1f)),
-          //      vertexProcessor1.Tr(new Float3(1f, -1f, 1f)),
-          //      new LightIntensity(1, 0, 0),
-          //      new LightIntensity(1, 0, 0),
-          //      new LightIntensity(1, 0, 0)
-          //  );
-
-          //  rasterizer.Triangle
-          //  (
-          //      vertexProcessor1.Tr(new Float3(-1f, 1f, 1f)),
-          //      vertexProcessor1.Tr(new Float3(1f, -1f, 1f)),
-          //      vertexProcessor1.Tr(new Float3(-1f, -1f, 1f)),
-          //      new LightIntensity(1, 0, 0),
-          //      new LightIntensity(1, 0, 0),
-          //      new LightIntensity(1, 0, 0)
-          //  );
-
-          //  rasterizer.Triangle
-          //  (
-          //      vertexProcessor1.Tr(new Float3(-1f, 1f, -1.0f)),
-          //      vertexProcessor1.Tr(new Float3(1f, 1f, 1f)),
-          //      vertexProcessor1.Tr(new Float3(-1f, 1f, 1f)),
-          //      new LightIntensity(0, 1, 0),
-          //      new LightIntensity(0, 1, 0),
-          //      new LightIntensity(0, 1, 0)
-          //  );
-
-          //  rasterizer.Triangle
-          //  (
-          //      vertexProcessor1.Tr(new Float3(-1f, 1f, -1.0f)),
-          //      vertexProcessor1.Tr(new Float3(1f, 1f, -1.0f)),
-          //      vertexProcessor1.Tr(new Float3(1f, 1f, 1f)),
-          //      new LightIntensity(0, 1, 0),
-          //      new LightIntensity(0, 1, 0),
-          //      new LightIntensity(0, 1, 0)
-          //  );
-
-          //  rasterizer.Triangle
-          //  (
-          //      vertexProcessor1.Tr(new Float3(1f, 1f, 1f)),
-          //      vertexProcessor1.Tr(new Float3(1f, 1f, -1.0f)),
-          //      vertexProcessor1.Tr(new Float3(1f, -1f, 1f)),
-          //      new LightIntensity(0, 1, 0),
-          //      new LightIntensity(0, 1, 0),
-          //      new LightIntensity(0, 1, 0)
-          //  );
-
-          //  rasterizer.Triangle
-          //  (
-          //      vertexProcessor1.Tr(new Float3(1f, 1f, -1.0f)),
-          //      vertexProcessor1.Tr(new Float3(1f, -1f, -1.0f)),
-          //      vertexProcessor1.Tr(new Float3(1f, -1f, 1f)),
-          //      new LightIntensity(0, 1, 0),
-          //      new LightIntensity(0, 1, 0),
-          //      new LightIntensity(0, 1, 0)
-          //  );
-
-          //  //blue
-          //  rasterizer.Triangle
-          //  (
-          //      vertexProcessor1.Tr(new Float3(-1f, -1f, 1f)),
-          //      vertexProcessor1.Tr(new Float3(1f, -1f, 1f)),
-          //      vertexProcessor1.Tr(new Float3(1f, -1f, -1f)),
-          //      new LightIntensity(0, 0, 1),
-          //      new LightIntensity(0, 0, 1),
-          //      new LightIntensity(0, 0, 1)
-          //  );
-
-          //  rasterizer.Triangle
-          //  (
-          //      vertexProcessor1.Tr(new Float3(1f, -1f, -1f)),
-          //      vertexProcessor1.Tr(new Float3(-1f, -1f, -1f)),
-          //      vertexProcessor1.Tr(new Float3(-1f, -1f, 1f)),
-          //      new LightIntensity(0, 0, 1),
-          //      new LightIntensity(0, 0, 1),
-          //      new LightIntensity(0, 0, 1)
-          //  );
-
-          //  //purple
-          //  rasterizer.Triangle
-          //  (
-          //      vertexProcessor1.Tr(new Float3(-1f, 1f, 1f)),
-          //      vertexProcessor1.Tr(new Float3(-1f, -1f, 1f)),
-          //      vertexProcessor1.Tr(new Float3(-1f, -1f, -1f)),
-          //      new LightIntensity(1, 0, 1),
-          //      new LightIntensity(1, 0, 1),
-          //      new LightIntensity(1, 0, 1)
-          //  );
-
-          //  rasterizer.Triangle
-          //  (
-          //      vertexProcessor1.Tr(new Float3(-1f, -1f, -1f)),
-          //      vertexProcessor1.Tr(new Float3(-1f, 1f, -1f)),
-          //      vertexProcessor1.Tr(new Float3(-1f, 1f, 1f)),
-          //      new LightIntensity(1, 0, 1),
-          //      new LightIntensity(1, 0, 1),
-          //      new LightIntensity(1, 0, 1)
-          //  );
-
-          //  //yellow
-          //  rasterizer.Triangle
-          //  (
-          //      vertexProcessor1.Tr(new Float3(1f, -1f, -1f)),
-          //      vertexProcessor1.Tr(new Float3(1f, 1f, -1f)),
-          //      vertexProcessor1.Tr(new Float3(-1f, 1f, -1f)),
-          //      new LightIntensity(1, 1, 0),
-          //      new LightIntensity(1, 1, 0),
-          //      new LightIntensity(1, 1, 0)
-          //  );
-
-          //  rasterizer.Triangle
-          //  (
-          //      vertexProcessor1.Tr(new Float3(-1f, -1f, -1f)),
-          //      vertexProcessor1.Tr(new Float3(1f, -1f, -1f)),
-          //      vertexProcessor1.Tr(new Float3(-1f, 1f, -1f)),
-          //      new LightIntensity(1, 1, 0),
-          //      new LightIntensity(1, 1, 0),
-          //      new LightIntensity(1, 1, 0)
-          //  );
+            //Cube cube1 = new Cube();
+            //cube1.draw(rasterizer, vertexProcessor1);
 
             #endregion
 
-           #region cube2
-          //  vertexProcessor1.SetIndentityObj();
-          //  vertexProcessor1.MultByTranslation(new Float3(-2f, 0f, 0));
-          //  vertexProcessor1.MultByRotation(45f, new Float3(0, 1, 0));
-          //  vertexProcessor1.MultByTranslation(new Float3(0f, 1f, 0));
-          //  vertexProcessor1.MultByScale(new Float3(0.5f, 0.5f, 0.5f));
-          //  vertexProcessor1.Transform();
+            #region cube2
+            //  vertexProcessor1.SetIndentityObj();
+            //  vertexProcessor1.MultByTranslation(new Float3(-2f, 0f, 0));
+            //  vertexProcessor1.MultByRotation(45f, new Float3(0, 1, 0));
+            //  vertexProcessor1.MultByTranslation(new Float3(0f, 1f, 0));
+            //  vertexProcessor1.MultByScale(new Float3(0.5f, 0.5f, 0.5f));
+            //  vertexProcessor1.Transform();
 
-
-          //  //cube
-          //  rasterizer.Triangle
-          //  (
-          //      vertexProcessor1.Tr(new Float3(-1f, 1f, 1f)),
-          //      vertexProcessor1.Tr(new Float3(1f, 1f, 1f)),
-          //      vertexProcessor1.Tr(new Float3(1f, -1f, 1f)),
-          //      new LightIntensity(1, 0, 0),
-          //      new LightIntensity(1, 0, 0),
-          //      new LightIntensity(1, 0, 0)
-          //  );
-
-          //  rasterizer.Triangle
-          //  (
-          //      vertexProcessor1.Tr(new Float3(-1f, 1f, 1f)),
-          //      vertexProcessor1.Tr(new Float3(1f, -1f, 1f)),
-          //      vertexProcessor1.Tr(new Float3(-1f, -1f, 1f)),
-          //      new LightIntensity(1, 0, 0),
-          //      new LightIntensity(1, 0, 0),
-          //      new LightIntensity(1, 0, 0)
-          //  );
-
-          //  rasterizer.Triangle
-          //  (
-          //      vertexProcessor1.Tr(new Float3(-1f, 1f, -1.0f)),
-          //      vertexProcessor1.Tr(new Float3(1f, 1f, 1f)),
-          //      vertexProcessor1.Tr(new Float3(-1f, 1f, 1f)),
-          //      new LightIntensity(0, 1, 0),
-          //      new LightIntensity(0, 1, 0),
-          //      new LightIntensity(0, 1, 0)
-          //  );
-
-          //  rasterizer.Triangle
-          //  (
-          //      vertexProcessor1.Tr(new Float3(-1f, 1f, -1.0f)),
-          //      vertexProcessor1.Tr(new Float3(1f, 1f, -1.0f)),
-          //      vertexProcessor1.Tr(new Float3(1f, 1f, 1f)),
-          //      new LightIntensity(0, 1, 0),
-          //      new LightIntensity(0, 1, 0),
-          //      new LightIntensity(0, 1, 0)
-          //  );
-
-          //  rasterizer.Triangle
-          //  (
-          //      vertexProcessor1.Tr(new Float3(1f, 1f, 1f)),
-          //      vertexProcessor1.Tr(new Float3(1f, 1f, -1.0f)),
-          //      vertexProcessor1.Tr(new Float3(1f, -1f, 1f)),
-          //      new LightIntensity(0, 1, 0),
-          //      new LightIntensity(0, 1, 0),
-          //      new LightIntensity(0, 1, 0)
-          //  );
-
-          //  rasterizer.Triangle
-          //  (
-          //      vertexProcessor1.Tr(new Float3(1f, 1f, -1.0f)),
-          //      vertexProcessor1.Tr(new Float3(1f, -1f, -1.0f)),
-          //      vertexProcessor1.Tr(new Float3(1f, -1f, 1f)),
-          //      new LightIntensity(0, 1, 0),
-          //      new LightIntensity(0, 1, 0),
-          //      new LightIntensity(0, 1, 0)
-          //  );
-
-          //  //blue
-          //  rasterizer.Triangle
-          //  (
-          //      vertexProcessor1.Tr(new Float3(-1f, -1f, 1f)),
-          //      vertexProcessor1.Tr(new Float3(1f, -1f, 1f)),
-          //      vertexProcessor1.Tr(new Float3(1f, -1f, -1f)),
-          //      new LightIntensity(0, 0, 1),
-          //      new LightIntensity(0, 0, 1),
-          //      new LightIntensity(0, 0, 1)
-          //  );
-
-          //  rasterizer.Triangle
-          //  (
-          //      vertexProcessor1.Tr(new Float3(1f, -1f, -1f)),
-          //      vertexProcessor1.Tr(new Float3(-1f, -1f, -1f)),
-          //      vertexProcessor1.Tr(new Float3(-1f, -1f, 1f)),
-          //      new LightIntensity(0, 0, 1),
-          //      new LightIntensity(0, 0, 1),
-          //      new LightIntensity(0, 0, 1)
-          //  );
-
-          //  //purple
-          //  rasterizer.Triangle
-          //  (
-          //      vertexProcessor1.Tr(new Float3(-1f, 1f, 1f)),
-          //      vertexProcessor1.Tr(new Float3(-1f, -1f, 1f)),
-          //      vertexProcessor1.Tr(new Float3(-1f, -1f, -1f)),
-          //      new LightIntensity(1, 0, 1),
-          //      new LightIntensity(1, 0, 1),
-          //      new LightIntensity(1, 0, 1)
-          //  );
-
-          //  rasterizer.Triangle
-          //  (
-          //      vertexProcessor1.Tr(new Float3(-1f, -1f, -1f)),
-          //      vertexProcessor1.Tr(new Float3(-1f, 1f, -1f)),
-          //      vertexProcessor1.Tr(new Float3(-1f, 1f, 1f)),
-          //      new LightIntensity(1, 0, 1),
-          //      new LightIntensity(1, 0, 1),
-          //      new LightIntensity(1, 0, 1)
-          //  );
-
-          //  //yellow
-          //  rasterizer.Triangle
-          //  (
-          //      vertexProcessor1.Tr(new Float3(1f, -1f, -1f)),
-          //      vertexProcessor1.Tr(new Float3(1f, 1f, -1f)),
-          //      vertexProcessor1.Tr(new Float3(-1f, 1f, -1f)),
-          //      new LightIntensity(1, 1, 0),
-          //      new LightIntensity(1, 1, 0),
-          //      new LightIntensity(1, 1, 0)
-          //  );
-
-          //  rasterizer.Triangle
-          //  (
-          //      vertexProcessor1.Tr(new Float3(-1f, -1f, -1f)),
-          //      vertexProcessor1.Tr(new Float3(1f, -1f, -1f)),
-          //      vertexProcessor1.Tr(new Float3(-1f, 1f, -1f)),
-          //      new LightIntensity(1, 1, 0),
-          //      new LightIntensity(1, 1, 0),
-          //      new LightIntensity(1, 1, 0)
-          //  );
+            //Cube cube1 = new Cube();
+            //cube1.draw(rasterizer, vertexProcessor1);
 
             #endregion
 
             #region cube3
-          //  vertexProcessor1.SetIndentityObj();
-          //  vertexProcessor1.MultByTranslation(new Float3(0f, -2f, 0));
-          // // vertexProcessor1.MultByRotation(20f, new Float3(0, 0, 1));
-          ////  vertexProcessor1.MultByTranslation(new Float3(0f, 1f, 0));
-          //  //vertexProcessor1.MultByScale(new Float3(1.5f, 0.5f, .5f));
-          //  vertexProcessor1.Transform();
+            //  vertexProcessor1.SetIndentityObj();
+            //  vertexProcessor1.MultByTranslation(new Float3(0f, -2f, 0));
+            // // vertexProcessor1.MultByRotation(20f, new Float3(0, 0, 1));
+            ////  vertexProcessor1.MultByTranslation(new Float3(0f, 1f, 0));
+            //  //vertexProcessor1.MultByScale(new Float3(1.5f, 0.5f, .5f));
+            //  vertexProcessor1.Transform();
 
-
-          //  //cube
-          //  rasterizer.Triangle
-          //  (
-          //      vertexProcessor1.Tr(new Float3(-1f, 1f, 1f)),
-          //      vertexProcessor1.Tr(new Float3(1f, 1f, 1f)),
-          //      vertexProcessor1.Tr(new Float3(1f, -1f, 1f)),
-          //      new LightIntensity(1, 0, 0),
-          //      new LightIntensity(1, 0, 0),
-          //      new LightIntensity(1, 0, 0)
-          //  );
-
-          //  rasterizer.Triangle
-          //  (
-          //      vertexProcessor1.Tr(new Float3(-1f, 1f, 1f)),
-          //      vertexProcessor1.Tr(new Float3(1f, -1f, 1f)),
-          //      vertexProcessor1.Tr(new Float3(-1f, -1f, 1f)),
-          //      new LightIntensity(1, 0, 0),
-          //      new LightIntensity(1, 0, 0),
-          //      new LightIntensity(1, 0, 0)
-          //  );
-
-          //  rasterizer.Triangle
-          //  (
-          //      vertexProcessor1.Tr(new Float3(-1f, 1f, -1.0f)),
-          //      vertexProcessor1.Tr(new Float3(1f, 1f, 1f)),
-          //      vertexProcessor1.Tr(new Float3(-1f, 1f, 1f)),
-          //      new LightIntensity(0, 1, 0),
-          //      new LightIntensity(0, 1, 0),
-          //      new LightIntensity(0, 1, 0)
-          //  );
-
-          //  rasterizer.Triangle
-          //  (
-          //      vertexProcessor1.Tr(new Float3(-1f, 1f, -1.0f)),
-          //      vertexProcessor1.Tr(new Float3(1f, 1f, -1.0f)),
-          //      vertexProcessor1.Tr(new Float3(1f, 1f, 1f)),
-          //      new LightIntensity(0, 1, 0),
-          //      new LightIntensity(0, 1, 0),
-          //      new LightIntensity(0, 1, 0)
-          //  );
-
-          //  rasterizer.Triangle
-          //  (
-          //      vertexProcessor1.Tr(new Float3(1f, 1f, 1f)),
-          //      vertexProcessor1.Tr(new Float3(1f, 1f, -1.0f)),
-          //      vertexProcessor1.Tr(new Float3(1f, -1f, 1f)),
-          //      new LightIntensity(0, 1, 0),
-          //      new LightIntensity(0, 1, 0),
-          //      new LightIntensity(0, 1, 0)
-          //  );
-
-          //  rasterizer.Triangle
-          //  (
-          //      vertexProcessor1.Tr(new Float3(1f, 1f, -1.0f)),
-          //      vertexProcessor1.Tr(new Float3(1f, -1f, -1.0f)),
-          //      vertexProcessor1.Tr(new Float3(1f, -1f, 1f)),
-          //      new LightIntensity(0, 1, 0),
-          //      new LightIntensity(0, 1, 0),
-          //      new LightIntensity(0, 1, 0)
-          //  );
-
-          //  //blue
-          //  rasterizer.Triangle
-          //  (
-          //      vertexProcessor1.Tr(new Float3(-1f, -1f, 1f)),
-          //      vertexProcessor1.Tr(new Float3(1f, -1f, 1f)),
-          //      vertexProcessor1.Tr(new Float3(1f, -1f, -1f)),
-          //      new LightIntensity(0, 0, 1),
-          //      new LightIntensity(0, 0, 1),
-          //      new LightIntensity(0, 0, 1)
-          //  );
-
-          //  rasterizer.Triangle
-          //  (
-          //      vertexProcessor1.Tr(new Float3(1f, -1f, -1f)),
-          //      vertexProcessor1.Tr(new Float3(-1f, -1f, -1f)),
-          //      vertexProcessor1.Tr(new Float3(-1f, -1f, 1f)),
-          //      new LightIntensity(0, 0, 1),
-          //      new LightIntensity(0, 0, 1),
-          //      new LightIntensity(0, 0, 1)
-          //  );
-
-          //  //purple
-          //  rasterizer.Triangle
-          //  (
-          //      vertexProcessor1.Tr(new Float3(-1f, 1f, 1f)),
-          //      vertexProcessor1.Tr(new Float3(-1f, -1f, 1f)),
-          //      vertexProcessor1.Tr(new Float3(-1f, -1f, -1f)),
-          //      new LightIntensity(1, 0, 1),
-          //      new LightIntensity(1, 0, 1),
-          //      new LightIntensity(1, 0, 1)
-          //  );
-
-          //  rasterizer.Triangle
-          //  (
-          //      vertexProcessor1.Tr(new Float3(-1f, -1f, -1f)),
-          //      vertexProcessor1.Tr(new Float3(-1f, 1f, -1f)),
-          //      vertexProcessor1.Tr(new Float3(-1f, 1f, 1f)),
-          //      new LightIntensity(1, 0, 1),
-          //      new LightIntensity(1, 0, 1),
-          //      new LightIntensity(1, 0, 1)
-          //  );
-
-          //  //yellow
-          //  rasterizer.Triangle
-          //  (
-          //      vertexProcessor1.Tr(new Float3(1f, -1f, -1f)),
-          //      vertexProcessor1.Tr(new Float3(1f, 1f, -1f)),
-          //      vertexProcessor1.Tr(new Float3(-1f, 1f, -1f)),
-          //      new LightIntensity(1, 1, 0),
-          //      new LightIntensity(1, 1, 0),
-          //      new LightIntensity(1, 1, 0)
-          //  );
-
-          //  rasterizer.Triangle
-          //  (
-          //      vertexProcessor1.Tr(new Float3(-1f, -1f, -1f)),
-          //      vertexProcessor1.Tr(new Float3(1f, -1f, -1f)),
-          //      vertexProcessor1.Tr(new Float3(-1f, 1f, -1f)),
-          //      new LightIntensity(1, 1, 0),
-          //      new LightIntensity(1, 1, 0),
-          //      new LightIntensity(1, 1, 0)
-          //  );
+            //Cube cube3 = new Cube();
+            //cube3.draw(rasterizer, vertexProcessor1);
 
             #endregion
 
@@ -447,3 +100,6 @@ namespace Potok
 
     }
 }
+
+
+

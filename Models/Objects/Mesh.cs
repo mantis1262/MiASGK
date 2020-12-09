@@ -12,6 +12,7 @@ namespace Potok
         int vSize, tSize;
         Vertex[] _verticles;
         Int3[] _indices;
+        LightIntensity[] _colors;   
 
         public int VSize { get => vSize; set => vSize = value; }
         public int TSize { get => tSize; set => tSize = value; }
@@ -32,7 +33,7 @@ namespace Potok
         }
 
 
-        public void draw(Rasterizer r, VertexProcessor vp)
+        public void Draw(Rasterizer r, VertexProcessor vp)
         {
             for (int i = 0; i < tSize; ++i)
             {
