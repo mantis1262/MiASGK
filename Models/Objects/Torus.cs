@@ -14,7 +14,7 @@ namespace Potok.Models.Objects
         {
 
 
-            Verticles = new Vertex[(sides + 1) * (cs_sides + 1)];
+            Vertices = new Vertex[(sides + 1) * (cs_sides + 1)];
             Indices = new Int3[((2 * sides + 4) * cs_sides) / 3];
 
             int angleincs = 360 / sides;
@@ -32,7 +32,7 @@ namespace Potok.Models.Objects
                 /* iterate sides: outer ring */
                 for (i = 0; i <= 360; i += angleincs, index++)
                 {
-                    Verticles[index] = new Vertex(new Float3((float)(currentradius * Math.Cos(i * Math.PI / 180)), (float)(currentradius * Math.Sin(i * Math.PI / 180)), zval), null);
+                    Vertices[index] = new Vertex(new Float3((float)(currentradius * Math.Cos(i * Math.PI / 180)), (float)(currentradius * Math.Sin(i * Math.PI / 180)), zval), null);
                 }
             }
 

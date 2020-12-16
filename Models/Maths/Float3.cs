@@ -20,7 +20,6 @@ namespace Potok
 
         public Float3 Normalized { get { return this / Length; } }
 
-
         public Float3()
         {
         }
@@ -31,7 +30,7 @@ namespace Potok
             Y = y;
             Z = z;
         }
-
+        #region operator
         public static Float3 operator +(Float3 v1, Float3 v2)
         {
             return new Float3
@@ -67,6 +66,21 @@ namespace Potok
                 );
         }
 
+        public static Float3 operator *(float value, Float3 v1)
+        {
+            return new Float3
+                (
+                    v1.X * value,
+                    v1.Y * value,
+                    v1.Z * value
+                );
+        }
+
+        public static Float3 operator *(Float3 left, Float3 right)
+        {
+            return new Float3(left.X * right.X, left.Y * right.Y, left.Z * right.Z);
+        }
+
         public static Float3 operator /(Float3 v, float value)
         {
             return new Float3
@@ -76,7 +90,7 @@ namespace Potok
                     v.Z / value
                 );
         }
-
+        #endregion
         public void Normalize()
         {
             float length = Length;
@@ -93,6 +107,16 @@ namespace Potok
                     Z * v.X - X * v.Z,
                     X * v.Y - Y * v.X
                 );
+        }
+
+        public float Dot(Float3 v)
+        {
+            return _x * v.X + _y * v.Y + _z * v.Z;
+        }
+
+        public Float3 Reflect(Float3 normal)
+        {   
+            return this - normal * (2 * Dot(normal)) ;
         }
     }
 }

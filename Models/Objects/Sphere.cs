@@ -15,7 +15,7 @@ namespace Potok.Models.Objects
 
             VSize = ver * (hor + 2);
             TSize = 2 * ver * hor;
-            Verticles = new Vertex[VSize];
+            Vertices = new Vertex[VSize];
             Indices = new Int3[TSize];
             int yy;
             for (yy = 0; yy <= hor + 1; yy++)
@@ -26,7 +26,7 @@ namespace Potok.Models.Objects
                 {
                     float x = (float)(r * Math.Cos(2.0f * Math.PI / ver * rr));
                     float z = (float)(r * Math.Sin(2.0f * Math.PI / ver * rr));
-                    Verticles[rr + yy * ver] = new Vertex(new Float3(x, y, z), null);
+                    Vertices[rr + yy * ver] = new Vertex(new Float3(x, y, z), null);
                     
                 }
             }

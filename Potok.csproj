@@ -65,6 +65,9 @@
     <Compile Include="Rendering\Buffer.cs" />
     <Compile Include="Rendering\Rasterizer.cs" />
     <Compile Include="Rendering\VertexProcessor.cs" />
+    <Compile Include="Textures\Light\Direct.cs" />
+    <Compile Include="Textures\Light\Light.cs" />
+    <Compile Include="Textures\Light\PointLight.cs" />
     <Compile Include="Textures\MyColor.cs" />
   </ItemGroup>
   <ItemGroup>

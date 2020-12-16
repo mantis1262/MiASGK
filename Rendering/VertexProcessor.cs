@@ -133,5 +133,19 @@ namespace Potok
             return new Float3(r.X / r.W, r.Y / r.W, r.Z / r.W);
         }
 
+        public Float3 TrView(Float3 v)
+        {
+            Float4 r = Obj2view * (new Float4(v, 1));
+
+            return new Float3(r.X / r.W, r.Y / r.W, r.Z / r.W);
+        }
+
+        public Float3 TrView3(Float3 v)
+        {
+            Float4 r = Obj2view * (new Float4(v, 0));
+
+            return new Float3(r.X, r.Y, r.Z);
+        }
+
     }
 }
