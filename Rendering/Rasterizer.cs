@@ -97,13 +97,13 @@ namespace Potok
 
         public void TrianglePixel(Vertex v1, Vertex v2, Vertex v3, VertexProcessor vp)
         {
-            float x1 = (v1.Position.X + 1) * _buffer.Width * HALF_FLOAT;
-            float x2 = (v2.Position.X + 1) * _buffer.Width * HALF_FLOAT;
-            float x3 = (v3.Position.X + 1) * _buffer.Width * HALF_FLOAT;
+            float x1 = (v1.HPos.X + 1) * _buffer.Width * HALF_FLOAT;
+            float x2 = (v2.HPos.X + 1) * _buffer.Width * HALF_FLOAT;
+            float x3 = (v3.HPos.X + 1) * _buffer.Width * HALF_FLOAT;
 
-            float y1 = (v1.Position.Y + 1) * _buffer.Heigth * HALF_FLOAT;
-            float y2 = (v2.Position.Y + 1) * _buffer.Heigth * HALF_FLOAT;
-            float y3 = (v3.Position.Y + 1) * _buffer.Heigth * HALF_FLOAT;
+            float y1 = (v1.HPos.Y + 1) * _buffer.Heigth * HALF_FLOAT;
+            float y2 = (v2.HPos.Y + 1) * _buffer.Heigth * HALF_FLOAT;
+            float y3 = (v3.HPos.Y + 1) * _buffer.Heigth * HALF_FLOAT;
 
             int minX = (int)Mathematic.Max(Mathematic.Min3(x1, x2, x3), _buffer.MinX);
             int maxX = (int)Mathematic.Min(Mathematic.Max3(x1, x2, x3), _buffer.MaxX);
@@ -146,12 +146,12 @@ namespace Potok
 
                         Vertex f = new Vertex
                             (
-                              (v1.Position * lambda1 + v2.Position * lambda2 + v3.Position * lambda3),
+                              (v1.HPos * lambda1 + v2.HPos * lambda2 + v3.HPos * lambda3),
                               (v1.Normal * lambda1 + v2.Normal * lambda2 + v3.Normal * lambda3),
                                 v1.Color,
                               (v1.HPos * lambda1 + v2.HPos * lambda2 + v3.HPos * lambda3)
                             );
-                        f.Color =new LightIntensity( Light.Calculate(f, vp));
+                        f.Color =new LightIntensity( Light.Calculate(f, vp) * 255.0f);
                         
                         float depth = v1.HPos.Z * lambda1 + v2.HPos.Z * lambda2 + v3.HPos.Z * lambda3;
                         if (depth < _buffer.Depth[x, y])

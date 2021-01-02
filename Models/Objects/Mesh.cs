@@ -93,6 +93,7 @@ namespace Potok
                 _vertices[_indices[i].B].HPos = vp.Tr(_vertices[_indices[i].B].Position);
                 _vertices[_indices[i].C].HPos = vp.Tr(_vertices[_indices[i].C].Position);
 
+
                 r.TrianglePixel(
                     _vertices[_indices[i].A],
                     _vertices[_indices[i].B],
