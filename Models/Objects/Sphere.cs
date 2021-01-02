@@ -9,13 +9,16 @@ namespace Potok.Models.Objects
 {
     public class Sphere : Mesh
     {
-        public Sphere(int hor, int ver)
+        public Sphere(int hor, int ver, LightIntensity color)
         {
 
 
             VSize = ver * (hor + 2);
             TSize = 2 * ver * hor;
             Vertices = new Vertex[VSize];
+            Colors = new LightIntensity[VSize];
+            for (int i = 0; i < VSize; i++)
+                Colors[i] = color;
             Indices = new Int3[TSize];
             int yy;
             for (yy = 0; yy <= hor + 1; yy++)

@@ -19,6 +19,8 @@ namespace Potok
         public int TSize { get => _tSize; set => _tSize = value; }
         public Vertex[] Vertices { get => _vertices; set => _vertices = value; }
         public Int3[] Indices { get => _indices; set => _indices = value; }
+        public LightIntensity[] Colors { get => _colors; set => _colors = value; }
+
 
 
         public Mesh()
@@ -79,6 +81,22 @@ namespace Potok
                     new LightIntensity(light.Calculate(_vertices[_indices[i].A], vp)),
                     new LightIntensity(light.Calculate(_vertices[_indices[i].B], vp)),
                     new LightIntensity(light.Calculate(_vertices[_indices[i].C], vp))
+                    );
+            }
+        }
+
+         public void DrawPiksel(Rasterizer r, VertexProcessor vp)
+        {
+            for (int i = 0; i < _tSize; ++i)
+            {
+                _vertices[_indices[i].A].HPos = vp.Tr(_vertices[_indices[i].A].Position);
+                _vertices[_indices[i].B].HPos = vp.Tr(_vertices[_indices[i].B].Position);
+                _vertices[_indices[i].C].HPos = vp.Tr(_vertices[_indices[i].C].Position);
+
+                r.TrianglePixel(
+                    _vertices[_indices[i].A],
+                    _vertices[_indices[i].B],
+                    _vertices[_indices[i].C], vp
                     );
 
             }

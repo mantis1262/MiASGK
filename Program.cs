@@ -36,15 +36,17 @@ namespace Potok
             Direct light = new Direct(new Float3(1f, -1f, 0f), new Float3(0.0f, 0.1f, 0.1f), new Float3(0.1f, 0.5f, 0.1f), new Float3(0.7f, 0.7f, 0.7f), 10);
             PointLight point = new PointLight(new Float3(0f, 5f, -2f), new Float3(0.0f, 0.1f, 0.1f), new Float3(0.1f, 0.5f, 0.1f), new Float3(.7f, .7f, .7f), 10);
 
+            rasterizer.Light = light;
+
             vertexProcessor1.SetPerspective(camera);
             vertexProcessor1.SetLookAt(camera);
             vertexProcessor1.MultByTranslation(new Float3(2f, 0f, 0));
             vertexProcessor1.Transform();
 
 
-            Sphere sphere = new Sphere(12, 24);
+            Sphere sphere = new Sphere(12, 24, new LightIntensity(1.0f,0f,0f));
             sphere.SetNormal();
-            sphere.Draw(rasterizer, vertexProcessor1, point);
+            sphere.DrawPiksel(rasterizer, vertexProcessor1);
 
             vertexProcessor1.SetIndentityObj();
             vertexProcessor1.MultByTranslation(new Float3(-2f, 0f, 0));
@@ -52,7 +54,7 @@ namespace Potok
 
 
             sphere.SetNormal();
-            sphere.Draw(rasterizer, vertexProcessor1, point);
+            sphere.DrawPiksel(rasterizer, vertexProcessor1);
 
             //   Cone cone = new Cone(16, 1f, 2f);
             //  cone.SetNormal();
@@ -71,7 +73,7 @@ namespace Potok
 
             Cube cube1 = new Cube();
             cube1.SetNormal();
-            cube1.Draw(rasterizer, vertexProcessor1, point);
+            cube1.DrawPiksel(rasterizer, vertexProcessor1);
 
             #endregion
 
