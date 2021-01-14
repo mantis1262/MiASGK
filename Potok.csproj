@@ -68,6 +68,7 @@
     <Compile Include="Textures\Light\Direct.cs" />
     <Compile Include="Textures\Light\Light.cs" />
     <Compile Include="Textures\Light\PointLight.cs" />
+    <Compile Include="Textures\Light\Spot.cs" />
     <Compile Include="Textures\MyColor.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -35,9 +35,10 @@ namespace Potok
 
             Direct light = new Direct(new Float3(1f, -1f, 0f), new Float3(0.0f, 0.1f, 0.1f), new Float3(0.1f, 0.5f, 0.1f), new Float3(0.7f, 0.7f, 0.7f), 10);
             PointLight point = new PointLight(new Float3(0f, 5f, -2f), new Float3(0.0f, 0.1f, 0.1f), new Float3(0.1f, 0.5f, 0.1f), new Float3(.7f, .7f, .7f), 10);
+            Spot spot = new Spot(new Float3(0f, 0f, -5f), new Float3(0.0f, 0.1f, 0.1f), new Float3(0.1f, 0.5f, 0.1f), new Float3(.7f, .7f, .7f), new Float3(0f,0f,0f), 50f, 10f);
 
            // rasterizer.Light = light;
-            rasterizer.Light = point;
+            rasterizer.Light = spot;
 
             vertexProcessor1.SetPerspective(camera);
             vertexProcessor1.SetLookAt(camera);
@@ -52,7 +53,7 @@ namespace Potok
            sphere.DrawPiksel(rasterizer, vertexProcessor1);
 
             vertexProcessor1.SetIndentityObj();
-            vertexProcessor1.MultByTranslation(new Float3(-2f, 0f, 0));
+            vertexProcessor1.MultByTranslation(new Float3(0f, 0f, 0));
             vertexProcessor1.Transform();
 
 
@@ -70,7 +71,7 @@ namespace Potok
 
             #region cube1
             vertexProcessor1.SetIndentityObj();
-            vertexProcessor1.MultByTranslation(new Float3(0f, -2f, 0));
+            vertexProcessor1.MultByTranslation(new Float3(2f, -3f, 0));
               //vertexProcessor1.MultByRotation(20f, new Float3(1, 1, 1));
             //  vertexProcessor1.MultByTranslation(new Float3(0f, 1f, 0));
             //  vertexProcessor1.MultByScale(new Float3(.5f, .5f, .5f));
@@ -78,20 +79,25 @@ namespace Potok
 
             Cube cube1 = new Cube();
             cube1.SetNormal();
+            //cube1.Draw(rasterizer, vertexProcessor1, point);
+            //cube1.Draw(rasterizer, vertexProcessor1, light);
             cube1.DrawPiksel(rasterizer, vertexProcessor1);
+            
 
             #endregion
 
             #region cube2
-            //  vertexProcessor1.SetIndentityObj();
-            //  vertexProcessor1.MultByTranslation(new Float3(-2f, 0f, 0));
+              vertexProcessor1.SetIndentityObj();
+              vertexProcessor1.MultByTranslation(new Float3(-2f, -3f, 0));
             //  vertexProcessor1.MultByRotation(45f, new Float3(0, 1, 0));
             //  vertexProcessor1.MultByTranslation(new Float3(0f, 1f, 0));
             //  vertexProcessor1.MultByScale(new Float3(0.5f, 0.5f, 0.5f));
-            //  vertexProcessor1.Transform();
+              vertexProcessor1.Transform();
 
             //Cube cube1 = new Cube();
-            //cube1.draw(rasterizer, vertexProcessor1);
+            //cube1.Draw(rasterizer, vertexProcessor1, spot);
+                        cube1.DrawPiksel(rasterizer, vertexProcessor1);
+
 
             #endregion
 
