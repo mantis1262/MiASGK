@@ -35,7 +35,7 @@ namespace Potok
 
             Direct light = new Direct(new Float3(1f, -1f, 0f), new Float3(0.0f, 0.1f, 0.1f), new Float3(0.1f, 0.5f, 0.1f), new Float3(0.7f, 0.7f, 0.7f), 10);
             PointLight point = new PointLight(new Float3(0f, 5f, -2f), new Float3(0.0f, 0.1f, 0.1f), new Float3(0.1f, 0.5f, 0.1f), new Float3(.7f, .7f, .7f), 10);
-            Spot spot = new Spot(new Float3(0f, 0f, -5f), new Float3(0.0f, 0.1f, 0.1f), new Float3(0.1f, 0.5f, 0.1f), new Float3(.7f, .7f, .7f), new Float3(0f,0f,0f), 50f, 10f);
+            Spot spot = new Spot(new Float3(0f, 0f, -6f), new Float3(0.0f, 0.1f, 0.1f), new Float3(0.1f, 0.5f, 0.1f), new Float3(.7f, .7f, .7f), new Float3(-0.5f,0f,-1f), 10f, 10f);
 
            // rasterizer.Light = light;
             rasterizer.Light = spot;

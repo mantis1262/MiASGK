@@ -15,7 +15,7 @@ namespace Potok.Textures.Light
         public Spot(Float3 position, Float3 ambient, Float3 diffuse, Float3 specular, Float3 dir, float coff, float shiness = 10) : base(position, ambient, diffuse, specular, shiness)
         {
             _direcion = dir;
-            _cutOff = (float)Math.Cos(Math.PI / 180f * coff);
+            _cutOff = 1f - (coff / 180f);
             
         }
 
@@ -24,23 +24,30 @@ namespace Potok.Textures.Light
         public override Float3 Calculate(Vertex v, VertexProcessor vp)
         {
             Float3 N = vp.TrView3(v.Normal).Normalized;
-            Float3 V = vp.TrView(-v.Position).Normalized;
+            Float3 V = vp.TrView(-v.Position);
             Float3 L = (Position - V).Normalized;
+            V.Normalize();
             Float3 R = L.Reflect(N).Normalized;
             float diff = Cut(L.Dot(N));
             float spec = (float)Math.Pow(Cut(R.Dot(V)), Shiness);
 
 
-            Float3 D = vp.TrView(-_direcion).Normalized;
-            float theta = L.Dot(D);
-            //  float epsilon = light.cutOff - light.outerCutOff;
-            //    float intensity = clamp((theta - light.outerCutOff) / epsilon, 0.0, 1.0);
 
-            if (theta > _cutOff)
+
+            Float3 dirs = Position - v.Position;
+
+            float outerCuttoff = 1f - (35f / 180f); 
+
+            float theta = _direcion.Normalized.Dot(dirs.Normalized);
+              float epsilon = _cutOff - outerCuttoff;
+              float intensity = Cut((theta - outerCuttoff) / epsilon);
+            diff = diff * intensity;
+            spec = spec * intensity;
+            
+           // if (theta > _cutOff)
                 return Cut(Ambient + Diffuse * diff + Specular * spec);
-            else
-                // return Cut(Ambient);
-                return new Float3(0, 0, 0);
+            //else
+            //    return Cut(Ambient);
         }
     }
 }

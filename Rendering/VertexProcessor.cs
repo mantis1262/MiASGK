@@ -143,6 +143,7 @@ namespace Potok
         public Float3 TrView3(Float3 v)
         {
             Float4 r = Obj2view * (new Float4(v, 0));
+            
 
             return new Float3(r.X, r.Y, r.Z);
         }
