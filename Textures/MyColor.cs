@@ -28,6 +28,14 @@ namespace Potok
             _alfa = 255;
         }
 
+        public MyColor(Color color)
+        {
+            _red = color.R;
+            _green = color.G;
+            _blue = color.B;
+            _alfa = color.A;
+        }
+
         public MyColor(uint alfa, uint red, uint green, uint blue)
         {
             _alfa = alfa;

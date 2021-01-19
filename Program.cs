@@ -35,7 +35,15 @@ namespace Potok
 
             Direct light = new Direct(new Float3(1f, -1f, 0f), new Float3(0.0f, 0.1f, 0.1f), new Float3(0.1f, 0.5f, 0.1f), new Float3(0.7f, 0.7f, 0.7f), 10);
             PointLight point = new PointLight(new Float3(0f, 5f, -2f), new Float3(0.0f, 0.1f, 0.1f), new Float3(0.1f, 0.5f, 0.1f), new Float3(.7f, .7f, .7f), 10);
-            Spot spot = new Spot(new Float3(0f, 0f, -6f), new Float3(0.0f, 0.1f, 0.1f), new Float3(0.1f, 0.5f, 0.1f), new Float3(.7f, .7f, .7f), new Float3(-0.5f,0f,-1f), 10f, 10f);
+            Spot spot = new Spot(new Float3(2f, 0f, -5f), new Float3(0.1f, 0.1f, 0.1f), new Float3(0.5f, 0.5f, 0.5f), new Float3(.7f, .7f, .7f), new Float3(0f,0f,-1f), 5f, 10f, 10f, true);
+
+            Buffer texture = new Buffer(512, 512);
+            Buffer texture2 = new Buffer(512, 512);
+            texture.Load("C:/Users/mantis/Documents/Studia/Dwa/MiASGK/Textures/a.jpg");
+            texture2.Load("C:/Users/mantis/Documents/Studia/Dwa/MiASGK/Textures/b.jpg");
+            light.Texture = texture;
+            point.Texture = texture;
+            spot.Texture = texture;
 
            // rasterizer.Light = light;
             rasterizer.Light = spot;
@@ -56,6 +64,7 @@ namespace Potok
             vertexProcessor1.MultByTranslation(new Float3(0f, 0f, 0));
             vertexProcessor1.Transform();
 
+            spot.Texture = texture2;
 
             sphere.SetNormal();
             //sphere.Draw(rasterizer, vertexProcessor1, point);
@@ -65,9 +74,6 @@ namespace Potok
             //   Cone cone = new Cone(16, 1f, 2f);
             //  cone.SetNormal();
             // cone.Draw(rasterizer,vertexProcessor1, light);
-
-
-
 
             #region cube1
             vertexProcessor1.SetIndentityObj();

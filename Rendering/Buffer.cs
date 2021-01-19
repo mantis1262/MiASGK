@@ -103,5 +103,19 @@ namespace Potok
             
             bitmap.Save(name);
         }
+
+
+        public void Load(string path)
+        {
+            Bitmap bitmap = new Bitmap(path);
+            for(int i = 0; i<bitmap.Width ; i++)
+            {
+                for (int j = 0; j < bitmap.Height; j++)
+                {
+                    _color[i, j] = new MyColor(bitmap.GetPixel(i, j));
+                }
+            }
+
+        }
     }
 }

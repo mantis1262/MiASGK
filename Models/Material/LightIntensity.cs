@@ -52,6 +52,13 @@ namespace Potok
             B = float3.Z;
         }
 
+        public LightIntensity(MyColor float3)
+        {
+            R = float3.Red/255f;
+            G = float3.Green/255f;
+            B = float3.Blue/255f;
+        }
+
         public override string ToString()
         {
             return "LightIntensity(" + R.ToString() + ";" + G.ToString() + ";" + B.ToString() + ")";

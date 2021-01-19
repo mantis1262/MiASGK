@@ -156,7 +156,6 @@ namespace Potok
                         float depth = v1.HPos.Z * lambda1 + v2.HPos.Z * lambda2 + v3.HPos.Z * lambda3;
                         if (depth < _buffer.Depth[x, y])
                         {
-                           // LightIntensity c = ((c1 * lambda1) + (c2 * lambda2) + (c3 * lambda3)) * 255f;
                             _buffer.SetPixel(f.Color, depth, x, y);
                         }
                     }

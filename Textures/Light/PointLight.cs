@@ -9,7 +9,7 @@ namespace Potok.Textures.Light
     public class PointLight : Light
     {
 
-        public PointLight(Float3 position, Float3 ambient, Float3 diffuse, Float3 specular, float shiness = 10) : base(position, ambient, diffuse, specular, shiness)
+        public PointLight(Float3 position, Float3 ambient, Float3 diffuse, Float3 specular, float shiness = 10, Buffer texture = null) : base(position, ambient, diffuse, specular, shiness, texture)
         {
         }
 
@@ -21,7 +21,18 @@ namespace Potok.Textures.Light
             Float3 R = L.Reflect(N).Normalized;
             float diff = Cut(L.Dot(N));
             float spec = (float)Math.Pow(Cut(R.Dot(V)), Shiness);
-            return Cut(Ambient + Diffuse * diff + Specular * spec);
+
+            Float3 textureColor = new Float3(1, 1, 1);
+
+
+            if (Texture != null)
+            {
+                LightIntensity c = GetSphereMappingLightIntensity(Texture.Color, v.Position);
+                textureColor = new Float3(c.R, c.G, c.B);
+            }
+
+
+            return Cut(Ambient + Diffuse * diff + Specular * spec) * textureColor;
         }
     }
 }

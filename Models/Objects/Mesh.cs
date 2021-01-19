@@ -13,7 +13,7 @@ namespace Potok
         int _vSize, _tSize;
         Vertex[] _vertices;
         Int3[] _indices;
-        LightIntensity[] _colors;   
+        LightIntensity[] _colors;
 
         public int VSize { get => _vSize; set => _vSize = value; }
         public int TSize { get => _tSize; set => _tSize = value; }
@@ -42,7 +42,7 @@ namespace Potok
             for (int i = 0; i < _tSize; i++)
             {
                 Float3 s = (Vertices[Indices[i].C].Position - Vertices[Indices[i].A].Position)
-                    .Cross (Vertices[Indices[i].B].Position - Vertices[Indices[i].A].Position)
+                    .Cross(Vertices[Indices[i].B].Position - Vertices[Indices[i].A].Position)
                     .Normalized;
 
                 Vertices[Indices[i].A].Normal += s;
@@ -71,7 +71,7 @@ namespace Potok
         }
 
         public void Draw(Rasterizer r, VertexProcessor vp, Light light)
-        {
+        { 
             for (int i = 0; i < _tSize; ++i)
             {
                 r.Triangle(
@@ -85,7 +85,7 @@ namespace Potok
             }
         }
 
-         public void DrawPiksel(Rasterizer r, VertexProcessor vp)
+        public void DrawPiksel(Rasterizer r, VertexProcessor vp)
         {
             for (int i = 0; i < _tSize; ++i)
             {
@@ -93,14 +93,22 @@ namespace Potok
                 _vertices[_indices[i].B].HPos = vp.Tr(_vertices[_indices[i].B].Position);
                 _vertices[_indices[i].C].HPos = vp.Tr(_vertices[_indices[i].C].Position);
 
-
                 r.TrianglePixel(
                     _vertices[_indices[i].A],
                     _vertices[_indices[i].B],
                     _vertices[_indices[i].C], vp
                     );
-
             }
         }
+
+        public void setColor(LightIntensity color)
+        {
+            for (int i = 0; i < _tSize; ++i)
+            {
+                _colors[i] = color;
+            }
+        }
+
+
     }
 }
