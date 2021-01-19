@@ -40,7 +40,7 @@ namespace Potok
             Buffer texture = new Buffer(512, 512);
             Buffer texture2 = new Buffer(512, 512);
             texture.Load("C:/Users/mantis/Documents/Studia/Dwa/MiASGK/Textures/a.jpg");
-            texture2.Load("C:/Users/mantis/Documents/Studia/Dwa/MiASGK/Textures/b.jpg");
+            texture2.Load("C:/Users/mantis/Documents/Studia/Dwa/MiASGK/Textures/b.png");
             light.Texture = texture;
             point.Texture = texture;
             spot.Texture = texture;

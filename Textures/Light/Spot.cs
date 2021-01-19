@@ -39,7 +39,7 @@ namespace Potok.Textures.Light
 
             if(Texture != null)
             {
-                LightIntensity c = GetSphereMappingLightIntensity(Texture.Color, v.Position);
+                LightIntensity c = GetSphereMappingLightIntensity(Texture.Color, v.HPos);
                 textureColor = new Float3(c.R, c.G, c.B);
             }
 

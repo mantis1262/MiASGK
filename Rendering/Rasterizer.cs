@@ -149,7 +149,7 @@ namespace Potok
                               (v1.HPos * lambda1 + v2.HPos * lambda2 + v3.HPos * lambda3),
                               (v1.Normal * lambda1 + v2.Normal * lambda2 + v3.Normal * lambda3),
                                 v1.Color,
-                              (v1.HPos * lambda1 + v2.HPos * lambda2 + v3.HPos * lambda3)
+                              (v1.Position * lambda1 + v2.Position * lambda2 + v3.Position * lambda3)
                             );
                         f.Color =new LightIntensity( Light.Calculate(f, vp) * 255.0f);
                         
