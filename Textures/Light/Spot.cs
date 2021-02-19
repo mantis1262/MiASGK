@@ -32,8 +32,8 @@ namespace Potok.Textures.Light
             Float3 L = (Position - V).Normalized;
             V.Normalize();
             Float3 R = L.Reflect(N).Normalized;
-            float diff = Cut(L.Dot(N));
-            float spec = (float)Math.Pow(Cut(R.Dot(V)), Shiness);
+            float diff = 0;
+            float spec = 0;
             Float3 textureColor = new Float3(1, 1, 1);
 
 
@@ -50,6 +50,8 @@ namespace Potok.Textures.Light
 
             if (_soft)
             {
+                diff = Cut(L.Dot(N));
+                spec = (float)Math.Pow(Cut(R.Dot(V)), Shiness);
                 float epsilon = _cutOff - _outercutOff;
                 float intensity = Cut((theta - _outercutOff) / epsilon);
                 diff = diff * intensity;
@@ -60,9 +62,13 @@ namespace Potok.Textures.Light
             else
             {
                 if (theta > _cutOff)
-                    return Cut((Ambient + Diffuse * diff + Specular * spec) * textureColor) ;
+                {
+                    diff = Cut(L.Dot(N));
+                    spec = (float)Math.Pow(Cut(R.Dot(V)), Shiness);
+                    return Cut((Ambient + Diffuse * diff + Specular * spec) * textureColor);
+                }
                 else
-                    return Cut(Ambient * textureColor);
+                    return Cut(textureColor);
             }
 
         }

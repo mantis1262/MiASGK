@@ -9,6 +9,7 @@ using System.Numerics;
 using Potok.Models;
 using Potok.Models.Objects;
 using Potok.Textures.Light;
+using System.Diagnostics;
 
 namespace Potok
 {
@@ -18,6 +19,8 @@ namespace Potok
 
         static void Main(string[] args)
         {
+            Stopwatch stopwatch = new Stopwatch();
+            stopwatch.Start();
             Buffer buffer = new Buffer(width: 800, height: 800);
             buffer.ClearColor();
             buffer.ClearDepth();
@@ -35,7 +38,7 @@ namespace Potok
 
             Direct light = new Direct(new Float3(1f, -1f, 0f), new Float3(0.0f, 0.1f, 0.1f), new Float3(0.1f, 0.5f, 0.1f), new Float3(0.7f, 0.7f, 0.7f), 10);
             PointLight point = new PointLight(new Float3(0f, 5f, -2f), new Float3(0.0f, 0.1f, 0.1f), new Float3(0.1f, 0.5f, 0.1f), new Float3(.7f, .7f, .7f), 10);
-            Spot spot = new Spot(new Float3(2f, 0f, -5f), new Float3(0.1f, 0.1f, 0.1f), new Float3(0.5f, 0.5f, 0.5f), new Float3(.7f, .7f, .7f), new Float3(0f,0f,-1f), 5f, 10f, 10f, true);
+            Spot spot = new Spot(new Float3(2f, 0f, -5f), new Float3(0.1f, 0.1f, 0.1f), new Float3(0.5f, 0.5f, 0.5f), new Float3(.7f, .7f, .7f), new Float3(0f, 0f,-1f), 15f, 15f, 10f, false);
 
             Buffer texture = new Buffer(512, 512);
             Buffer texture2 = new Buffer(512, 512);
@@ -61,7 +64,9 @@ namespace Potok
            sphere.DrawPiksel(rasterizer, vertexProcessor1);
 
             vertexProcessor1.SetIndentityObj();
-            vertexProcessor1.MultByTranslation(new Float3(0f, 0f, 0));
+            vertexProcessor1.MultByRotation(90, new Float3(1, 0, 0));
+            vertexProcessor1.MultByScale(new Float3(0.5f, 0.5f, 1f));
+            //vertexProcessor1.MultByTranslation(new Float3(0f, 0f, 0));
             vertexProcessor1.Transform();
 
             spot.Texture = texture2;
@@ -78,7 +83,8 @@ namespace Potok
             #region cube1
             vertexProcessor1.SetIndentityObj();
             vertexProcessor1.MultByTranslation(new Float3(2f, -3f, 0));
-              //vertexProcessor1.MultByRotation(20f, new Float3(1, 1, 1));
+           //             vertexProcessor1.MultByRotation(90, new Float3(1, 0, 0));
+
             //  vertexProcessor1.MultByTranslation(new Float3(0f, 1f, 0));
             //  vertexProcessor1.MultByScale(new Float3(.5f, .5f, .5f));
               vertexProcessor1.Transform();
@@ -122,6 +128,9 @@ namespace Potok
 
             DateTime date = DateTime.Now;
             buffer.Save(date.Hour.ToString() + "_" + date.Minute.ToString() + "_" + date.Second.ToString() +  "_picture.png");
+            stopwatch.Stop();
+            Console.WriteLine(stopwatch.Elapsed.TotalSeconds);
+            Console.ReadKey();
         }
 
     }
